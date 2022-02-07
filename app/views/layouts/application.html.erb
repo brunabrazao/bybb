@@ -1,16 +1,20 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Bybb</title>
+    <title>BYBB - Your software for continuous performance management</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
+    <header>
+      <%= render partial: "homepage/main_navigation" %>
+    </header>
+    <% if notice %>
+      <p class='notice'><%= notice %></p>
+    <% end %>
     <%= yield %>
   </body>
+  <%= render partial: 'homepage/footer' %>
 </html>
