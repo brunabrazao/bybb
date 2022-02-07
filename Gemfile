@@ -7,6 +7,7 @@ ruby "3.0.0"
 gem "rails", "~> 7.0.1"
 
 gem 'pry', '~> 0.13.1'
+gem 'rails-controller-testing'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
