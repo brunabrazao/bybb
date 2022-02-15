@@ -5,7 +5,7 @@
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: #5a5a5a;
+  color: black;
 }
 
 /* CUSTOMIZE THE CAROUSEL
@@ -24,13 +24,12 @@ body {
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
-  background-repeat: no-repeat;
-  background-size: cover;
   margin-bottom: 5rem;
 }
 
 .first-carousel-item {
-  background-image: url("homepage/charles-deluvio-unsplash.jpg");
+  background: url("homepage/charles-deluvio-unsplash.jpg") no-repeat center
+    center fixed;
 }
 
 .second-carousel-item {
@@ -48,7 +47,6 @@ body {
 .featurette-heading {
   font-weight: 300;
   line-height: 1;
-  /* rtl:remove */
   letter-spacing: -0.05rem;
 }
 
@@ -71,19 +69,5 @@ body {
 @media (min-width: 62em) {
   .featurette-heading {
     margin-top: 7rem;
-  }
-}
-
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
   }
 }
