@@ -11,10 +11,12 @@
     <header>
       <%= render partial: "homepage/main_navigation" %>
     </header>
-    <% if notice %>
-      <p class='notice'><%= notice %></p>
-    <% end %>
-    <%= yield %>
+    <main role="main">
+      <% if notice %>
+        <p class='notice'><%= notice %></p>
+      <% end %>
+      <%= yield %>
+    </main>
+    <%= render partial: 'homepage/footer' %>
   </body>
-  <%= render partial: 'homepage/footer' %>
 </html>
