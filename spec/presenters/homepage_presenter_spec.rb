@@ -27,4 +27,22 @@ RSpec.describe HomepagePresenter do
       )
     end
   end
+  describe '#featurette_props' do
+    it 'returns an array with featurette props' do
+      expect(subject.featurette_props).to eq(
+        [OpenStruct.new(featurette_item_class: '',
+                        header: 'Foster better communication',
+                        sub_header: 'empowering people',
+                        copy: 'Understand what makes your team thrive and unlock peak performance with an open,
+                           transparent and human-centred approach.',
+                        img: 'homepage/pexels-1552617'),
+         OpenStruct.new(featurette_item_class: 'order-md-2',
+                        header: 'Technology is not the opposite of',
+                        sub_header: 'human',
+                        copy: 'A centralised solution that enable line managers, human resources teams and organisations
+                           to stay connected with their people helping them to succeed.',
+                        img: 'homepage/pexels-3184357')]
+      )
+    end
+  end
 end
