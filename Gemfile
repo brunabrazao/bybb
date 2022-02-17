@@ -50,6 +50,8 @@ gem 'bootstrap', '~> 5.1.3'
 gem 'normalize-rails'
 gem 'sassc-rails'
 
+gem 'aws-sdk', '~> 3'
+gem 'aws-sdk-rails'
 gem 'mail_form'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
