@@ -1,4 +1,5 @@
-<main>
-  <%= render partial: 'carousel' %>
-  <%= render partial: 'featurette' %>
-</main>
+<% presenter = HomepagePresenter.new %>
+<%= render partial: 'carousel', locals: { presenter: presenter } %>
+<% presenter.featurette_props.each do |item| %>
+  <%= render partial: 'featurette', locals: { featurette_item_class: item.featurette_item_class, header: item.header, sub_header: item.sub_header, copy: item.copy, img: item.img} %>
+<% end %>

@@ -2,7 +2,7 @@ class HomepagePresenter < BasePresenter
   def main_navigation_links
     [
       OpenStruct.new(menu_item: 'Home', link: root_url),
-      OpenStruct.new(menu_item: 'How it works', link: root_url),
+      OpenStruct.new(menu_item: 'How it works', link: how_it_works_path),
       OpenStruct.new(menu_item: 'Book a free demo', link: root_url)
     ]
   end
@@ -17,6 +17,23 @@ class HomepagePresenter < BasePresenter
                      header: 'Your partner for continuous performance management',
                      copy: 'Effectively manage expectations through open communication',
                      cta: 'Book a demo')
+    ]
+  end
+
+  def featurette_props
+    [
+      OpenStruct.new(featurette_item_class: '',
+                     header: 'Foster better communication',
+                     sub_header: 'empowering people',
+                     copy: 'Understand what makes your team thrive and unlock peak performance with an open,
+                           transparent and human-centred approach.',
+                     img: 'homepage/pexels-1552617'),
+      OpenStruct.new(featurette_item_class: 'order-md-2',
+                     header: 'Technology is not the opposite of',
+                     sub_header: 'human',
+                     copy: 'A centralised solution that enable line managers, human resources teams and organisations
+                           to stay connected with their people helping them to succeed.',
+                     img: 'homepage/pexels-3184357')
     ]
   end
 end
