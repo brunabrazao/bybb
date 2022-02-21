@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @reports = Report.all
@@ -8,20 +9,20 @@ class ReportsController < ApplicationController
   def show; end
 
   def new
-    @report = Report.new
+    @report = current_user.reports.build
   end
 
   def edit; end
 
   def create
-    @report = Report.new(report_params)
+    @report = current_user.reports.build(report_params)
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to report_url(@report), notice: 'Report was successfully created.' }
+        format.html { redirect_to @report, notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
