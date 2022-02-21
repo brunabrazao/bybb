@@ -1,0 +1,17 @@
+<%= form_with(model: report) do |form| %>
+  <div>
+    <%= form.label :weekly_priority, style: "display: block" %>
+    <%= form.text_area :weekly_priority %>
+  </div>
+  <div>
+    <%= form.label :biggest_challenge, style: "display: block" %>
+    <%= form.text_area :biggest_challenge %>
+  </div>
+  <div>
+    <%= form.label :additional, style: "display: block" %>
+    <%= form.text_area :additional %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
