@@ -7,11 +7,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <% presenter.main_navigation_links.each do |item| %>
-          <li class="nav-item">
-            <%= link_to item.menu_item, item.link, class: 'nav-link' %>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Manage your account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% presenter.main_navigation_signed_in_links.each do |item| %>
+                <li><%= link_to item.menu_item, item.link, class: "dropdown-item" %></li>
+              <% end %>
+            </ul>
           </li>
-        <% end %>
+        <% else %>
+          <% presenter.main_navigation_links.each do |item| %>
+            <li class="nav-item">
+              <%= link_to item.menu_item, item.link, class: 'nav-link' %>
+            </li>
+          <% end %>
+        <% end%>
       </ul>
       <% if user_signed_in? %>
         <%= button_to('Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-warning') %>
