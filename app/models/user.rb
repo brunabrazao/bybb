@@ -8,5 +8,5 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :reports
-  belongs_to :organisation
+  belongs_to :organisation, optional: true
 end
