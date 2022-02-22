@@ -1,5 +1,6 @@
 class OrganisationsController < ApplicationController
   before_action :set_organisation, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   def index
     @organisations = Organisation.all
@@ -9,6 +10,7 @@ class OrganisationsController < ApplicationController
 
   def new
     @organisation = Organisation.new
+    assign_user_to_organisation(@organisation)
   end
 
   def edit; end
@@ -18,7 +20,11 @@ class OrganisationsController < ApplicationController
 
     respond_to do |format|
       if @organisation.save
-        format.html { redirect_to organisation_url(@organisation), notice: 'Organisation was successfully created.' }
+        assign_user_to_organisation(@organisation)
+
+        format.html do
+          redirect_to organisation_url(@organisation), notice: 'Organisation was successfully created.'
+        end
         format.json { render :show, status: :created, location: @organisation }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,5 +62,9 @@ class OrganisationsController < ApplicationController
 
   def organisation_params
     params.require(:organisation).permit(:title, :short_description)
+  end
+
+  def assign_user_to_organisation(organisation)
+    organisation.users << current_user
   end
 end
