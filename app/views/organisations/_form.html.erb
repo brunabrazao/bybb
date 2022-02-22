@@ -1,0 +1,13 @@
+<%= form_with(model: organisation) do |form| %>
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :short_description, style: "display: block" %>
+    <%= form.text_area :short_description %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
