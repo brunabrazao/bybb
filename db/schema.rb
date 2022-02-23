@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_230139) do
+ActiveRecord::Schema.define(version: 2022_02_23_003704) do
 
   create_table "organisations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 2022_02_22_230139) do
     t.integer "invitations_count", default: 0
     t.integer "organisation_id"
     t.integer "role_id"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at", precision: 6
+    t.datetime "last_sign_in_at", precision: 6
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
