@@ -11,6 +11,18 @@ RSpec.describe HomepagePresenter do
     end
   end
 
+  describe '#main_navigation_signed_in_links' do
+    it 'returns an array with menu items' do
+      expect(subject.main_navigation_signed_in_links).to eq(
+        [OpenStruct.new(menu_item: 'Dashboard', link: Rails.application.routes.url_helpers.root_url),
+         OpenStruct.new(menu_item: 'Create Weekly Report', link: Rails.application.routes.url_helpers.new_report_path),
+         OpenStruct.new(menu_item: 'Manage Reports', link: Rails.application.routes.url_helpers.reports_path),
+         OpenStruct.new(menu_item: 'Manage Reviews', link: Rails.application.routes.url_helpers.root_url),
+         OpenStruct.new(menu_item: 'Company Feed', link: Rails.application.routes.url_helpers.root_url)]
+      )
+    end
+  end
+
   describe '#carousel_props' do
     it 'returns an array with carousel props' do
       expect(subject.carousel_props).to eq(

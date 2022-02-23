@@ -7,6 +7,17 @@ class HomepagePresenter < BasePresenter
     ]
   end
 
+  def main_navigation_signed_in_links
+    [
+      OpenStruct.new(menu_item: 'Dashboard', link: root_url),
+      OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
+      OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
+      OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
+      OpenStruct.new(menu_item: 'Company Feed', link: root_url)
+
+    ]
+  end
+
   def carousel_props
     [
       OpenStruct.new(carousel_item_class: 'active first-carousel-item',
