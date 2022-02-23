@@ -8,5 +8,11 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :reports
+  belongs_to :role, optional: true
   belongs_to :organisation, optional: true
+  before_save :assign_role
+
+  def assign_role
+    self.role = Role.find_by name: 'OrgMember' if role.nil?
+  end
 end
