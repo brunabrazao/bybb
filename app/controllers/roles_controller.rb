@@ -1,21 +1,20 @@
 class RolesController < ApplicationController
-  before_action :set_role, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @roles = Role.all
   end
 
-  def show; end
-
-  def new
-    @role = Role.new
+  def show
+    display_associated_users
   end
+
+  def new; end
 
   def edit; end
 
   def create
-    @role = Role.new(role_params)
-
     respond_to do |format|
       if @role.save
         format.html { redirect_to role_url(@role), notice: 'Role was successfully created.' }
@@ -50,11 +49,17 @@ class RolesController < ApplicationController
 
   private
 
-  def set_role
-    @role = Role.find(params[:id])
-  end
+  def set_role; end
 
   def role_params
     params.require(:role).permit(:name, :description)
+  end
+
+  def display_associated_users
+    if @role.users.empty?
+      @associated_user = 'None'
+    else
+      @associated_users = @role.users.map(&:email).join(', ')
+    end
   end
 end

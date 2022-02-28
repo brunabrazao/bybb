@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :roles
-  resources :organisations
   resources :reports
-  devise_for :users
+  devise_for :users, controllers: { invitations: 'invitations' }
+
+  scope '/admin' do
+    resources :users
+    resources :organisations
+    resources :roles
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

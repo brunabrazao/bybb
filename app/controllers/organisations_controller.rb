@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
-  before_action :set_organisation, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @organisations = Organisation.all
@@ -8,19 +8,13 @@ class OrganisationsController < ApplicationController
 
   def show; end
 
-  def new
-    @organisation = Organisation.new
-    assign_user_to_organisation(@organisation)
-  end
+  def new; end
 
   def edit; end
 
   def create
-    @organisation = Organisation.new(organisation_params)
-
     respond_to do |format|
       if @organisation.save
-        assign_user_to_organisation(@organisation)
 
         format.html do
           redirect_to organisation_url(@organisation), notice: 'Organisation was successfully created.'
