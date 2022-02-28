@@ -1,10 +1,42 @@
-<h1>Organisations</h1>
-<div id="organisations">
-  <% @organisations.each do |organisation| %>
-    <%= render organisation %>
-    <p>
-      <%= link_to "Show this organisation", organisation %>
-    </p>
-  <% end %>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Manage Organisations</h1>
+    <div id="organisations">
+      <% if can? :create, Organisation %>
+        <%= link_to "Add new organisation", new_organisation_path, class: 'btn btn-success' %>
+      <% end %>
+      <% @organisations.each do |organisation| %>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Organisation title</th>
+                <th scope="col">Short description</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Destroy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><%= organisation.id%></th>
+                <td><%= link_to organisation.title.truncate(20), organisation %></td>
+                <td><%= link_to organisation.short_description.truncate(50), organisation %></td>
+                <% if can? :update, organisation %>
+                  <td><%= link_to 'Edit', edit_organisation_path(organisation), class: 'btn btn-primary' %></td>
+                <% else%>
+                  <td>You don't have privileges to update this organisation</td>
+                <% end %>
+                <% if can? :destroy, organisation %>
+                  <td><%= link_to 'Destroy', organisation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+                <% else%>
+                  <td>You don't have privileges to destroy this organisation</td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<%= link_to "New organisation", new_organisation_path %>
