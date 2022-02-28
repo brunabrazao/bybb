@@ -1,13 +1,15 @@
-<%= form_with(model: organisation) do |form| %>
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :short_description, style: "display: block" %>
-    <%= form.text_area :short_description %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="form-group">
+  <%= form_with(model: organisation) do |form| %>
+    <div>
+      <%= form.label :title, style: "display: block" %>
+      <%= form.text_field :title %>
+    </div>
+    <div>
+      <%= form.label :short_description, style: "display: block" %>
+      <%= form.text_area :short_description %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
