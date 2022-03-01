@@ -1,0 +1,13 @@
+<% if current_user.role.admin? %>
+  <%= render partial: 'super_admin'%>
+<% elsif current_user.role.org_admin? %>
+  <%= render partial: 'org_admin' %>
+<% elsif current_user.role.org_member? %>
+  <%= render partial: 'org_member' %>
+<%else%>
+  <div class="container py-3">
+    <div class="mt-5">
+      <h1>Please contact BYBB admin</h1>
+    </div>
+  </div>
+<% end%>
