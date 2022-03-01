@@ -1,0 +1,42 @@
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Manage Users</h1>
+    <div id="organisations">
+      <% if can? :create, User %>
+        <%= link_to "Invite new user", new_user_invitation_path, class: 'btn btn-success' %>
+      <% end %>
+      <div class="container py-3">
+        <div class="mt-5">
+          <% @users.each do |user|%>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Organisation</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><%= user.id%></th>
+                    <td><%= user.email.truncate(15) %></td>
+                    <td><%= user.role.name if user.role.present?%></td>
+                    <% if user.organisation.present? %>
+                      <td><%= user.organisation.title.truncate(15) %></td>
+                    <%else%>
+                      <td><%= link_to 'Assign an organisation now', user, class: 'btn btn-warning' %></td>
+                    <%end%>
+                    <td><%= link_to 'View', user, class: 'btn btn-primary' %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <% end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
