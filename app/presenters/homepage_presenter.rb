@@ -1,4 +1,8 @@
 class HomepagePresenter < BasePresenter
+  def initialize(current_user)
+    @current_user = current_user
+  end
+
   def main_navigation_links
     [
       OpenStruct.new(menu_item: 'Home', link: root_url),
@@ -9,7 +13,8 @@ class HomepagePresenter < BasePresenter
 
   def main_navigation_signed_in_links
     [
-      OpenStruct.new(menu_item: 'Dashboard', link: root_url),
+      OpenStruct.new(menu_item: 'Dashboard', link: dashboard_path),
+      (OpenStruct.new(menu_item: 'Manage Organisations', link: organisations_path) if @current_user.role.admin?),
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
       OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
