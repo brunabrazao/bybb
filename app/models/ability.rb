@@ -7,15 +7,23 @@ class Ability
       can :manage, :all
     elsif user.role.org_admin?
       can :read, Organisation
-      can :create, Organisation
       can :update, Organisation do |org|
         org.try(:user) == user
       end
       can :destroy, Organisation do |org|
         org.try(:user) == user
       end
+      can :read, Report
+      can :create, Report
+      can :update, Report do |r|
+        r.try(:user) == user
+      end
     elsif user.role.org_member?
       can :read, Organisation
+      can :update, Report do |r|
+        r.try(:user) == user
+      end
+      can :create, Report
     end
     # Define abilities for the passed in user here. For example:
     #
