@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   resources :reports
+  get 'users/sign_up', to: 'homepage#index'
+
   devise_for :users, controllers: { invitations: 'invitations' }
 
   scope '/admin' do
