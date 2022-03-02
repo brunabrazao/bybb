@@ -1,0 +1,8 @@
+<% presenter = DashboardsPresenter.new %>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Dashboard</h1>
+    <h5>Your permission: <%= current_user.role.name.humanize%></h5>
+    <%= render partial: 'grid', locals: { items: presenter.super_admin_items }%>
+  </div>
+</div>

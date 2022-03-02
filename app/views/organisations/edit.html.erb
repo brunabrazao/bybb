@@ -1,10 +1,14 @@
-<h1>Editing organisation</h1>
-
-<%= render "form", organisation: @organisation %>
-
-<br>
-
-<div>
-  <%= link_to "Show this organisation", @organisation %> |
-  <%= link_to "Back to organisations", organisations_path %>
-</div>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Editing <%= @organisation.title.truncate(80) %></h1>
+    <%= render "form", organisation: @organisation %>
+    <br>
+    <div>
+      <%= link_to "Show this organisation", @organisation, class: 'btn btn-primary' %> |
+      <%= link_to "Back to organisations", organisations_path, class: 'btn btn-primary' %>
+    </div>
+    <hr>
+    <% if can? :update, @organisation %>
+      <%= link_to 'Invite users to join this organisation', new_user_invitation_path, class: 'btn btn-success' %>
+    <% end %>
+  </div>

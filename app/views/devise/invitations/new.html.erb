@@ -1,6 +1,10 @@
-<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-  <div class="form">
+<div class="container py-3">
+  <div class="mt-5">
     <h2><%= t "devise.invitations.new.header" %></h2>
+    <p>Please note that by inviting a user, you're assigning them to your organisation.</p>
+    <p>If you wish to
+      change a user's organisation after inviting them, i.e. you're a super admin user,
+      please go to your dashboard and manage users.</p>
     <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <% resource.class.invite_key_fields.each do |field| -%>
