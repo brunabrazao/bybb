@@ -8,7 +8,7 @@
       <%= link_to "Back to organisations", organisations_path, class: 'btn btn-primary' %>
     </div>
     <hr>
-    <% if can? :update, @organisation %>
+    <% if can? :update, @organisation && @organisation.has_remaining_licenses?%>
       <%= link_to 'Invite users to join this organisation', new_user_invitation_path, class: 'btn btn-success' %>
     <% end %>
   </div>
