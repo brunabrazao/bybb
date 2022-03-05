@@ -12,15 +12,19 @@ class HomepagePresenter < BasePresenter
   end
 
   def main_navigation_signed_in_links
-    [
+    menu = [
       OpenStruct.new(menu_item: 'Dashboard', link: dashboard_path),
-      (OpenStruct.new(menu_item: 'Manage Organisations', link: organisations_path) if @current_user.role.admin?),
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
       OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
-      OpenStruct.new(menu_item: 'Company Feed', link: root_url)
+      OpenStruct.new(menu_item: 'Company Feed', link: root_url),
+      OpenStruct.new(menu_item: 'My Settings', link: edit_user_path(@current_user))
 
     ]
+
+    menu << OpenStruct.new(menu_item: 'Manage Organisations', link: organisations_path) if @current_user.role.admin?
+
+    menu
   end
 
   def carousel_props
