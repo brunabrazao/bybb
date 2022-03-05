@@ -60,7 +60,8 @@ class UsersController < ApplicationController
       :password_confirmation,
       :name,
       :role_id,
-      :organisation_id
+      :organisation_id,
+      :manager
     )
   end
 end
