@@ -1,0 +1,15 @@
+<div class="form-group">
+  <%= form_with(model: @user) do |form| %>
+    <div>
+      <%= form.label :organisation_id, style: "display: block" %>
+      <%= form.text_field :organisation_id %>
+    </div>
+    <div class="mt-3">
+      <%= form.label :manager, style: "display: block" %>
+      <%= form.text_field :manager %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

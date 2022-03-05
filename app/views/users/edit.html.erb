@@ -1,0 +1,10 @@
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Editing <%= @user.email %></h1>
+    <%= render "form", user: @user %>
+    <br>
+    <div>
+      <%= link_to "Show this user", @user, class: 'btn btn-primary' %> |
+      <%= link_to "Back to users", users_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
