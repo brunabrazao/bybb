@@ -1,17 +1,19 @@
-<%= form_with(model: report) do |form| %>
-  <div>
-    <%= form.label :weekly_priority, style: "display: block" %>
-    <%= form.text_area :weekly_priority %>
-  </div>
-  <div>
-    <%= form.label :biggest_challenge, style: "display: block" %>
-    <%= form.text_area :biggest_challenge %>
-  </div>
-  <div>
-    <%= form.label :additional, style: "display: block" %>
-    <%= form.text_area :additional %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="form-group">
+  <%= form_with(model: report) do |form| %>
+    <div>
+      <%= form.label :weekly_priority, style: "display: block" %>
+      <%= form.text_area :weekly_priority, class: 'form-control' %>
+    </div>
+    <div>
+      <%= form.label :biggest_challenge, style: "display: block" %>
+      <%= form.text_area :biggest_challenge, class: 'form-control' %>
+    </div>
+    <div>
+      <%= form.label :additional, style: "display: block" %>
+      <%= form.text_area :additional, class: 'form-control' %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
