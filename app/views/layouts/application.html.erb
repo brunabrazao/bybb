@@ -15,11 +15,13 @@
       <% if notice %>
         <div class="mt-3">
           <p class="alert alert-success"><%= notice %></p>
-        <% end %>
-        <% if alert %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="mt-3">
           <p class="alert alert-danger"><%= alert %></p>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
     <%= render partial: 'homepage/footer' %>
