@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @users = User.all
@@ -60,7 +61,8 @@ class UsersController < ApplicationController
       :password_confirmation,
       :name,
       :role_id,
-      :organisation_id
+      :organisation_id,
+      :manager
     )
   end
 end

@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def assign_role
     self.role = Role.find_by name: 'OrgMember' if role.nil?
   end
+
+  def manager_assigned?
+    manager.present?
+  end
 end

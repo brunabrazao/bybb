@@ -3,13 +3,17 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @reports = Report.all
+    render_reports
   end
 
   def show; end
 
   def new
-    @report = current_user.reports.build
+    if current_user.reports.last.submitted_this_week?
+      redirect_to reports_url, notice: 'You already submitted a report this week :)'
+    else
+      @report = current_user.reports.build
+    end
   end
 
   def edit; end
@@ -57,5 +61,13 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:weekly_priority, :biggest_challenge, :additional)
+  end
+
+  def render_reports
+    @reports = if current_user.role.admin?
+                 Report.all
+               else
+                 current_user.reports.all
+               end
   end
 end
