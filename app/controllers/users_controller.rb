@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
   before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
-    @users = User.all
+    render_users
   end
 
   def show; end
@@ -40,6 +39,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    set_user
+
     @user.destroy
 
     respond_to do |format|
@@ -64,5 +65,15 @@ class UsersController < ApplicationController
       :organisation_id,
       :manager
     )
+  end
+
+  def render_users
+    @users = if current_user.role.admin?
+               User.all
+             elsif current_user.role.org_admin? && current_user.organisation.present?
+               [current_user.organisation.users].flatten
+             else
+               redirect_to root_url
+             end
   end
 end
