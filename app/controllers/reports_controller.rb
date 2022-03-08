@@ -9,7 +9,9 @@ class ReportsController < ApplicationController
   def show; end
 
   def new
-    if current_user.reports.last.submitted_this_week?
+    ensure_that_user_has_line_manager_assigned
+
+    if user_already_submitted_report
       redirect_to reports_url, notice: 'You already submitted a report this week :)'
     else
       @report = current_user.reports.build
@@ -69,5 +71,15 @@ class ReportsController < ApplicationController
                else
                  current_user.reports.all
                end
+  end
+
+  def user_already_submitted_report
+    current_user_reports = current_user.reports
+
+    current_user_reports.any? && current_user_reports.last.submitted_this_week?
+  end
+
+  def ensure_that_user_has_line_manager_assigned
+    redirect_to root_url unless current_user.manager.present?
   end
 end
