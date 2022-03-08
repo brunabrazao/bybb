@@ -1,16 +1,21 @@
 <div class="container py-3 mt-5">
   <h1>Your weekly reports</h1>
-  <div class="mt-5"id="reports">
-    <% @reports.each do |report| %>
-      <p class="lead"><%= link_to "#{report.created_at.strftime('%a, %e %b %Y')}", report, class: 'text-decoration-none' %></p>
-    <% end %>
-    <div class="mt-5">
-      <% if @reports.any? && @reports.last.submitted_this_week? %>
-        <p>You are up to date and don't need to submit another report this week. You can still edit this week's report.</p>
-      <% else %>
-        <p> You haven't submitted any report :)</p>
-        <%= link_to "Create a new report", new_report_path , class: 'btn btn-primary' %>
+  <% if current_user.manager.present?  %>
+    <p class="lead">Your line manager: <% current_user.manager %> </p>
+    <div class="mt-5"id="reports">
+      <% @reports.each do |report| %>
+        <p class="lead"><%= link_to "#{report.created_at.strftime('%a, %e %b %Y')}", report, class: 'text-decoration-none' %></p>
       <% end %>
+      <div class="mt-5">
+        <% if @reports.any? && @reports.last.submitted_this_week? %>
+          <p>You are up to date and don't need to submit another report this week. You can still edit this week's report.</p>
+        <% else %>
+          <p> You haven't submitted any report :)</p>
+          <%= link_to "Create a new report", new_report_path , class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <p>You haven't been assigned to a line manager yet and can't create a report.</p>
+  <% end %>
 </div>
