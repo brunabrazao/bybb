@@ -1,13 +1,14 @@
 <div class="container py-3">
   <div class="mt-5">
-    <h1>Manage Report</h1>
-    <%= render @report %>
-    <div>
-      <% if @report.user == current_user && @report.submitted_this_week? %>
-        <%= link_to "Edit this report", edit_report_path(@report) %> |
+    <h1>Your report</h1>
+    <% if @report.user == current_user && @report.submitted_this_week? %>
+      <div>
+        <%= link_to "Edit this report", edit_report_path(@report), class: 'btn btn-success' %>
         <%= button_to "Destroy this report", @report, method: :delete,  class: 'btn btn-danger' %>
-      <% end %>
-      <%= link_to "Back to reports", reports_path %>
-    </div>
+      </div>
+    <% end %>
   </div>
+  <%= render @report %>
+  <hr>
+  <%= link_to "Back to reports", reports_path %>
 </div>

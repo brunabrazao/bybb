@@ -1,17 +1,16 @@
-<div id="<%= dom_id report %>">
-  <p>
-    <strong>Weekly priority:</strong>
-    <%= report.weekly_priority %>
-  </p>
-
-  <p>
-    <strong>Biggest challenge:</strong>
-    <%= report.biggest_challenge %>
-  </p>
-
-  <p>
-    <strong>Additional:</strong>
-    <%= report.additional %>
-  </p>
-
+<div id="<%= dom_id report %>" class="mt-5">
+  <div class="bg-light p-5 rounded">
+    <div class="mt-3">
+      <h3>What are your priorities for next week?</h3>
+      <p class="mt-2"><%= report.weekly_priority %></p>
+    </div>
+    <div  class="mt-5">
+      <h3>What's your biggest challenge right now?</h3>
+      <p class="mt-2"><%= report.biggest_challenge %></p>
+    </div>
+    <div  class="mt-5">
+      <h3>Anything else you would like to raise?</h3>
+      <p class="mt-2"><%= report.additional %></p>
+    </div>
+  </div>
 </div>
