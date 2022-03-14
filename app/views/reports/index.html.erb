@@ -1,7 +1,6 @@
 <div class="container py-3 mt-5">
   <h1>Your weekly reports</h1>
-  <% if current_user.manager.present?  %>
-    <p class="lead">Your line manager: <% current_user.manager %> </p>
+  <% if current_user.manager_id.present?  %>
     <div class="mt-5"id="reports">
       <% @reports.each do |report| %>
         <p class="lead"><%= link_to "#{report.created_at.strftime('%a, %e %b %Y')}", report, class: 'text-decoration-none' %></p>

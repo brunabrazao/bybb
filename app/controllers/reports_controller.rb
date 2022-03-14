@@ -80,6 +80,6 @@ class ReportsController < ApplicationController
   end
 
   def ensure_that_user_has_line_manager_assigned
-    redirect_to root_url unless current_user.manager.present?
+    redirect_to root_url unless current_user.manager_id.present?
   end
 end
