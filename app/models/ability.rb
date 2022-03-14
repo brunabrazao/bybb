@@ -3,23 +3,31 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+
     if user.role.admin?
       can :manage, :all
     elsif user.role.org_admin?
-      can :read, Organisation
       can :update, Organisation do |org|
-        org.try(:user) == user
+        org.users.include?(user)
       end
-      can :destroy, Organisation do |org|
-        org.try(:user) == user
+      can :read, Organisation do |org|
+        org.users.include?(user)
       end
       can :read, Report
       can :create, Report
       can :update, Report do |r|
         r.try(:user) == user
       end
+      can :read, User do |u|
+        u.organisation == user.organisation
+      end
+      can :update, User do |u|
+        u.organisation == user.organisation
+      end
+      can :destroy, User do |u|
+        u.organisation == user.organisation
+      end
     elsif user.role.org_member?
-      can :read, Organisation
       can :update, Report do |r|
         r.try(:user) == user
       end

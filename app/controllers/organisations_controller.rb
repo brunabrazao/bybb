@@ -3,7 +3,7 @@ class OrganisationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @organisations = Organisation.all
+    render_organisations
   end
 
   def show; end
@@ -58,7 +58,13 @@ class OrganisationsController < ApplicationController
     params.require(:organisation).permit(:title, :short_description)
   end
 
-  def assign_user_to_organisation(organisation)
-    organisation.users << current_user
+  def render_organisations
+    @organisations = if current_user.role.admin?
+                       Organisation.all
+                     elsif current_user.role.org_admin? && current_user.organisation.present?
+                       [current_user.organisation]
+                     else
+                      redirect_to root_url
+                     end
   end
 end

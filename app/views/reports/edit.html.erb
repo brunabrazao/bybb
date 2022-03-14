@@ -1,10 +1,11 @@
-<h1>Editing report</h1>
-
-<%= render "form", report: @report %>
-
-<br>
-
-<div>
-  <%= link_to "Show this report", @report %> |
-  <%= link_to "Back to reports", reports_path %>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Editing report</h1>
+    <%= render "form", report: @report %>
+    <br>
+    <div>
+      <%= link_to "Show this report", @report %> |
+      <%= link_to "Back to reports", reports_path %>
+    </div>
+  </div>
 </div>

@@ -15,6 +15,15 @@ class DashboardsPresenter < BasePresenter
     ]
   end
 
+  def org_admin_items
+    [
+      OpenStruct.new(title: 'My Organisation', description: 'View and manage your organisation',
+                     link: organisations_path),
+      OpenStruct.new(title: 'Manage reports', description: 'Manage your reports', link: reports_path),
+      OpenStruct.new(title: 'Users', description: 'Manage users in your organisation', link: users_path)
+    ]
+  end
+
   def any_report_this_week?(reports)
     reports.any?(&submitted_this_week?)
   end

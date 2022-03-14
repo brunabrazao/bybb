@@ -17,6 +17,6 @@ class User < ApplicationRecord
   end
 
   def manager_assigned?
-    manager.present?
+    manager_id.present?
   end
 end

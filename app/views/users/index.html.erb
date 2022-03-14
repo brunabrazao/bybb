@@ -2,8 +2,8 @@
   <div class="mt-5">
     <h1>Manage Users</h1>
     <div id="organisations">
-      <% if can? :create, User %>
-        <%= link_to "Invite new user", new_user_invitation_path, class: 'btn btn-success' %>
+      <% if current_user.organisation.has_remaining_licenses? && current_user.role.org_admin? %>
+        <%= link_to 'Invite users to join this organisation', new_user_invitation_path, class: 'btn btn-success' %>
       <% end %>
       <div class="container py-3">
         <div class="mt-5">

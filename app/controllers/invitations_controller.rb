@@ -1,4 +1,6 @@
 class InvitationsController < Devise::InvitationsController
+  before_action :authenticate_user!
+
   private
 
   # This is called when creating invitation.

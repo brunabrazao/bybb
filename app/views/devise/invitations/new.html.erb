@@ -1,21 +1,25 @@
-<div class="container py-3">
-  <div class="mt-5">
-    <h2><%= t "devise.invitations.new.header" %></h2>
-    <p>Please note that by inviting a user, you're assigning them to your organisation.</p>
-    <p>If you wish to
-      change a user's organisation after inviting them, i.e. you're a super admin user,
-      please go to your dashboard and manage users.</p>
-    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <% resource.class.invite_key_fields.each do |field| -%>
-        <div class="field">
-          <%= f.label field %><br />
-          <%= f.text_field field %>
+<% if current_user.role.org_admin? && current_user.organisation.has_remaining_licenses? %>
+  <div class="container py-3">
+    <div class="mt-5">
+      <h2><%= t "devise.invitations.new.header" %></h2>
+      <p>Please note that by inviting a user, you're assigning them to your organisation.</p>
+      <p>If you wish to
+        change a user's organisation after inviting them, i.e. you're a super admin user,
+        please go to your dashboard and manage users.</p>
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <div class="field">
+            <%= f.label field %><br />
+            <%= f.text_field field %>
+          </div>
+        <% end -%>
+        <div class="actions mt-5">
+          <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary' %>
         </div>
-      <% end -%>
-      <div class="actions mt-5">
-        <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <p class ="mt-5"> Nothing to see here :) </p>
+<% end %>
