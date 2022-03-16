@@ -55,7 +55,7 @@ class OrganisationsController < ApplicationController
   end
 
   def organisation_params
-    params.require(:organisation).permit(:title, :short_description)
+    params.require(:organisation).permit(:title, :short_description, :licenses)
   end
 
   def render_organisations
