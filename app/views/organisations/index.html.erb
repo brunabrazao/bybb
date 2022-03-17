@@ -21,7 +21,7 @@
               <tr>
                 <th scope="row"><%= organisation.id%></th>
                 <td><%= link_to organisation.title.truncate(20), organisation %></td>
-                <td><%= link_to organisation.short_description.truncate(50), organisation %></td>
+                <td><%= link_to organisation.short_description&.truncate(50), organisation %></td>
                 <% if can? :update, organisation %>
                   <td><%= link_to 'Edit', edit_organisation_path(organisation), class: 'btn btn-primary' %></td>
                 <% else%>
