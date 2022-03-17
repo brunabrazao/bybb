@@ -12,4 +12,8 @@ class Role < ApplicationRecord
   def org_member?
     name == 'OrgMember'
   end
+
+  def allow_to_invite_users?
+    admin? || org_admin?
+  end
 end
