@@ -1,4 +1,4 @@
-<% if current_user.role.org_admin? && current_user.organisation.has_remaining_licenses? %>
+<% if current_user.role.allow_to_invite_users? && current_user.organisation.has_remaining_licenses? %>
   <div class="container py-3">
     <div class="mt-5">
       <h2><%= t "devise.invitations.new.header" %></h2>

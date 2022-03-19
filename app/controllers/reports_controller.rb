@@ -1,12 +1,12 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!
 
-  def index
-    render_reports
+  def index; end
+
+  def show
+    redirect_to root_url unless has_permission_to_view_reports?
   end
-
-  def show; end
 
   def new
     ensure_that_user_has_line_manager_assigned
@@ -55,7 +55,21 @@ class ReportsController < ApplicationController
     end
   end
 
+  helper_method :reports_for_current_user, :reports_for_current_user_manager
+
+  def reports_for_current_user
+    [Report.find_by(user_id: current_user)]
+  end
+
+  def reports_for_current_user_manager
+    Report.where(user: User.where(manager_id: current_user.id))
+  end
+
   private
+
+  def has_permission_to_view_reports?
+    @report.user == current_user || @report.user.manager_id == current_user.id
+  end
 
   def set_report
     @report = Report.find(params[:id])
