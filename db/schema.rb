@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_125246) do
+ActiveRecord::Schema.define(version: 2022_03_20_130208) do
 
   create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "organisation_title"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2022_03_20_125246) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "feed_id"
+    t.index ["feed_id"], name: "index_posts_on_feed_id"
   end
 
   create_table "reports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
