@@ -1,5 +1,8 @@
 class Organisation < ApplicationRecord
   has_many :users
+  has_one :feed
+
+  before_save :assign_feed
 
   def remaining_licenses_count
     if licenses.nil?
@@ -11,5 +14,9 @@ class Organisation < ApplicationRecord
 
   def has_remaining_licenses?
     remaining_licenses_count.positive?
+  end
+
+  def assign_feed
+    self.feed = Feed.new(organisation_title: title, organisation_id: id) if feed.nil?
   end
 end
