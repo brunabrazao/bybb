@@ -55,7 +55,7 @@ class OrganisationsController < ApplicationController
   end
 
   def organisation_params
-    params.require(:organisation).permit(:title, :short_description, :licenses)
+    params.require(:organisation).permit(:title, :short_description, :licenses, :feed_id)
   end
 
   def render_organisations
@@ -64,7 +64,7 @@ class OrganisationsController < ApplicationController
                      elsif current_user.role.org_admin? && current_user.organisation.present?
                        [current_user.organisation]
                      else
-                      redirect_to root_url
+                       redirect_to root_url
                      end
   end
 end
