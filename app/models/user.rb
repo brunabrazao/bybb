@@ -11,6 +11,7 @@ class User < ApplicationRecord
   belongs_to :role, optional: true
   belongs_to :organisation, optional: true
   before_save :assign_role
+  has_many :posts
 
   def assign_role
     self.role = Role.find_by name: 'OrgMember' if role.nil?
