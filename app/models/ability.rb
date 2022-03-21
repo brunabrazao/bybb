@@ -10,6 +10,9 @@ class Ability
       can :update, Organisation do |org|
         org.users.include?(user)
       end
+      can :read, Feed do |f|
+        f.organisation_id == user.organisation_id
+      end
       can :read, Organisation do |org|
         org.users.include?(user)
       end
@@ -30,6 +33,9 @@ class Ability
     elsif user.role.org_member?
       can :update, Report do |r|
         r.try(:user) == user
+      end
+      can :read, Feed do |f|
+        f.organisation_id == user.organisation_id
       end
       can :create, Report
     end
