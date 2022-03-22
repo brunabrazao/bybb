@@ -17,7 +17,7 @@ class HomepagePresenter < BasePresenter
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
       OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
-      OpenStruct.new(menu_item: 'Company Feed', link: root_url),
+      OpenStruct.new(menu_item: 'Company Feed', link: feed_path(set_company_feed)),
       OpenStruct.new(menu_item: 'My Settings', link: edit_user_path(@current_user))
 
     ]
@@ -55,5 +55,12 @@ class HomepagePresenter < BasePresenter
                            to stay connected with their people helping them to succeed.',
                      img: 'homepage/pexels-3184357')
     ]
+  end
+
+  private
+
+  def set_company_feed
+    org = Organisation.find_by(id: @current_user.organisation_id)
+    org.feed.id
   end
 end
