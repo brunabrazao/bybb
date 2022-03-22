@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     end
   end
 
-  helper_method :user_options, :user_manager_email
+  helper_method :user_options, :user_manager_email, :organisation_options
 
   def user_options
     if @user.organisation.users.length <= 1 && @user.manager_id.nil?
@@ -58,6 +58,12 @@ class UsersController < ApplicationController
       User.all.where(organisation: current_user.organisation).map do |user|
         [user.email, user.id]
       end
+    end
+  end
+
+  def organisation_options
+    Organisation.all.map do |org|
+      [org.title, org.id]
     end
   end
 

@@ -9,16 +9,22 @@ class PostsController < ApplicationController
   def show; end
 
   def new
+    feed_posts = Feed.find_by(organisation_id: current_user.organisation_id).posts
+
     @post = current_user.posts.build
+
+    feed_posts << @post
   end
 
   def edit; end
 
   def create
+    feed_posts = Feed.find_by(organisation_id: current_user.organisation_id)
     @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
+        feed_posts << @post
         format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else

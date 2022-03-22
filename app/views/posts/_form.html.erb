@@ -1,22 +1,20 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="d-flex justify-content-center mt-5 form-group">
+  <%= form_with(model: post) do |form| %>
+    <% if post.errors.any? %>
+      <div style="color: red">
+        <p><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</p>
+        <ul>
+          <% post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= form.text_area :body, required: true, class: 'form-control-lg' %>
+    </div>
+    <div class = "mt-5 text-center">
+      <%= form.submit "Create", class: 'btn btn-primary' %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

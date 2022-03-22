@@ -1,0 +1,24 @@
+<div class="container py-3">
+  <div class="mt-5">
+    <h1 class="text-center"><%= @feed.organisation_title %>'s Feed</h1>
+    <p class="lead text-center mt-3">Give kudos to your colleagues and celebrate together. &#x1F44B;</p>
+    <% @feed.posts.each do |post| %>
+      <div class="d-flex justify-content-center">
+        <div class="card mb-2 mt-2">
+          <div class="card-body">
+            <h5 class="card-title text-muted">
+              <small class="float-right">
+                &#128079; Posted on <%= post.created_at.to_s(:custom_datetime) %>
+              </small>
+              by <%= post.user.email %>
+            </h5>
+            <div class="card-text mb-2"><%= post.body %></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="d-flex justify-content-center mt-5">
+      <%= link_to "Add a message", new_post_path, class: 'btn btn-warning' %>
+    </div>
+  </div>
+</div>
