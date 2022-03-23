@@ -3,6 +3,7 @@
   <div class="mt-5">
     <h1>Dashboard</h1>
     <h5>Your permission: <%= current_user.role.name%></h5>
+    <h5>Your company: <%= current_user.organisation.title%></h5>
     <%= render partial: 'grid', locals: { items: presenter.org_admin_items }%>
   </div>
 </div>
