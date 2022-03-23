@@ -20,7 +20,10 @@ class DashboardsPresenter < BasePresenter
       OpenStruct.new(title: 'My Organisation', description: 'View and manage your organisation',
                      link: organisations_path),
       OpenStruct.new(title: 'Manage reports', description: 'Manage your reports', link: reports_path),
-      OpenStruct.new(title: 'Users', description: 'Manage users in your organisation', link: users_path)
+      OpenStruct.new(title: 'Users', description: 'Manage users in your organisation', link: users_path),
+      OpenStruct.new(title: 'Review Cycles', description: 'Manage review cycles in your organisation',
+                     link: reviews_cycles_path)
+
     ]
   end
 

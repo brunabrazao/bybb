@@ -17,12 +17,15 @@ class HomepagePresenter < BasePresenter
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
       OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
-      OpenStruct.new(menu_item: 'Company Feed', link: feed_path(set_company_feed)),
-      OpenStruct.new(menu_item: 'My Settings', link: edit_user_path(@current_user))
+      OpenStruct.new(menu_item: 'Company Feed', link: feed_path(set_company_feed))
 
     ]
 
     menu << OpenStruct.new(menu_item: 'Manage Organisations', link: organisations_path) if @current_user.role.admin?
+    if @current_user.role.admin? || @current_user.role.org_admin?
+      menu << OpenStruct.new(menu_item: 'Manage Review Cycles',
+                             link: reviews_cycles_path)
+    end
 
     menu
   end
