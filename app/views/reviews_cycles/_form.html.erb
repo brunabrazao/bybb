@@ -2,7 +2,6 @@
   <% if reviews_cycle.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(reviews_cycle.errors.count, "error") %> prohibited this reviews_cycle from being saved:</h2>
-
       <ul>
         <% reviews_cycle.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,17 +9,10 @@
       </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
-  <div>
-    <%= form.label :organisation_id, style: "display: block" %>
-    <%= form.number_field :organisation_id %>
-  </div>
-
   <div>
     <%= form.submit %>
   </div>
