@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reviews cycles</h1>
+
+<div id="reviews_cycles">
+  <% @reviews_cycles.each do |reviews_cycle| %>
+    <%= render reviews_cycle %>
+    <p>
+      <%= link_to "Show this reviews cycle", reviews_cycle %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New reviews cycle", new_reviews_cycle_path %>

@@ -1,6 +1,7 @@
 class Organisation < ApplicationRecord
   has_many :users
   has_one :feed
+  has_many :reviews_cycles
 
   before_save :assign_feed
 
