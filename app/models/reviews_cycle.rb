@@ -6,4 +6,8 @@ class ReviewsCycle < ApplicationRecord
   serialize :selected_users, Array
   store_accessor :questions, :question_one, :question_two, :question_three, :question_four, :question_five,
                  :question_six, :question_seven, :question_eight, :question_nine, :question_ten
+
+  def locked?
+    review_request_date <= Date.today
+  end
 end
