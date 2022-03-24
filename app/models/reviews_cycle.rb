@@ -10,4 +10,8 @@ class ReviewsCycle < ApplicationRecord
   def locked?
     review_request_date <= Date.today
   end
+
+  def unlocked?
+    !locked?
+  end
 end
