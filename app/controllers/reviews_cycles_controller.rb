@@ -13,7 +13,9 @@ class ReviewsCyclesController < ApplicationController
     @reviews_cycle = current_user.organisation.reviews_cycles.build
   end
 
-  def edit; end
+  def edit
+    redirect_to dashboard_path, alert: 'You no longer can edit this review cycle' if @reviews_cycle.locked?
+  end
 
   def create
     @reviews_cycle = current_user.organisation.reviews_cycles.build(reviews_cycle_params)
