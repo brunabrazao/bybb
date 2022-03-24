@@ -55,9 +55,8 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:answer_1, :answer_2,
-                                   :answer_3, :answer_4, :answer_5,
-                                   :answer_6, :answer_7, :answer_8, :answer_9, :answer_10,
+    params.require(:review).permit(:answer_one, :answer_two, :answer_three, :answer_four, :answer_five,
+                                   :answer_six, :answer_seven, :answer_eight, :answer_nine, :answer_ten,
                                    :reviews_cycle_id)
   end
 end
