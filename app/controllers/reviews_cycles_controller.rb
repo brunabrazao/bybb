@@ -3,7 +3,8 @@ class ReviewsCyclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reviews_cycles = ReviewsCycle.all
+    redirect_to dashboard_url unless current_user.role.org_admin?
+    @reviews_cycles = current_organisation.reviews_cycles.all
   end
 
   def show; end
