@@ -22,6 +22,7 @@ class ReviewsCyclesController < ApplicationController
 
     respond_to do |format|
       if @reviews_cycle.save
+        assign_users_to_review_cycle(@reviews_cycle)
         format.html { redirect_to reviews_cycle_url(@reviews_cycle), notice: 'Reviews cycle was successfully created.' }
         format.json { render :show, status: :created, location: @reviews_cycle }
       else
@@ -34,6 +35,7 @@ class ReviewsCyclesController < ApplicationController
   def update
     respond_to do |format|
       if @reviews_cycle.update(reviews_cycle_params)
+        assign_users_to_review_cycle(@reviews_cycle)
 
         format.html do
           redirect_to reviews_cycle_url(@reviews_cycle), notice: 'Reviews cycle was successfully updated.'
@@ -64,5 +66,15 @@ class ReviewsCyclesController < ApplicationController
   def reviews_cycle_params
     params.require(:reviews_cycle).permit(:name, :organisation_id, :review_request_date, :question_one, :question_two, :question_three, :question_four, :question_five,
                                           :question_six, :question_seven, :question_eight, :question_nine, :question_ten, selected_users: [])
+  end
+
+  def assign_users_to_review_cycle(cycle)
+    user_ids = cycle.selected_users.reject(&:empty?)
+
+    user_list = user_ids.map do |u|
+      User.find_by(id: u.to_i)
+    end
+
+    cycle.users << user_list
   end
 end
