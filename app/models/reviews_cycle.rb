@@ -3,6 +3,7 @@ class ReviewsCycle < ApplicationRecord
   has_many :reviews
   has_and_belongs_to_many :users
   serialize :questions, Array
+  serialize :selected_users, Array
 
   def questions=(questions)
     questions = questions.split(',') if questions.is_a?(String)
