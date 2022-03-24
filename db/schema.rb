@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_212527) do
+ActiveRecord::Schema.define(version: 2022_03_23_234826) do
 
   create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "organisation_title"
@@ -46,6 +46,33 @@ ActiveRecord::Schema.define(version: 2022_03_23_212527) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "question_1"
+    t.string "answer_1"
+    t.string "question_2"
+    t.string "answer_2"
+    t.string "question_3"
+    t.string "answer_3"
+    t.string "question_4"
+    t.string "answer_4"
+    t.string "question_5"
+    t.string "answer_5"
+    t.string "question_6"
+    t.string "answer_6"
+    t.string "question_7"
+    t.string "answer_7"
+    t.string "question_8"
+    t.string "answer_8"
+    t.string "question_9"
+    t.string "answer_9"
+    t.string "question_10"
+    t.string "answer_10"
+    t.integer "reviews_cycle_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reviews_cycle_id"], name: "index_reviews_on_reviews_cycle_id"
   end
 
   create_table "reviews_cycles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

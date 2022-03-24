@@ -1,5 +1,6 @@
 class ReviewsCycle < ApplicationRecord
   belongs_to :organisation
+  has_many :reviews
   serialize :questions, Array
 
   def questions=(questions)
