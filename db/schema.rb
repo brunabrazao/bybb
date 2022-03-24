@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_165054) do
+ActiveRecord::Schema.define(version: 2022_03_24_174037) do
 
   create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "organisation_title"
@@ -84,6 +84,13 @@ ActiveRecord::Schema.define(version: 2022_03_24_165054) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "questions"
     t.index ["organisation_id"], name: "index_reviews_cycles_on_organisation_id"
+  end
+
+  create_table "reviews_cycles_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reviews_cycle_id", null: false
+    t.index ["reviews_cycle_id", "user_id"], name: "index_reviews_cycles_users_on_reviews_cycle_id_and_user_id"
+    t.index ["user_id", "reviews_cycle_id"], name: "index_reviews_cycles_users_on_user_id_and_reviews_cycle_id"
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

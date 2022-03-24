@@ -13,6 +13,7 @@ class User < ApplicationRecord
   before_save :assign_role
   has_many :posts
   has_many :reviews
+  has_and_belongs_to_many :reviews_cycles
 
   def assign_role
     self.role = Role.find_by name: 'OrgMember' if role.nil?
