@@ -60,6 +60,7 @@ class ReviewsCyclesController < ApplicationController
   end
 
   def reviews_cycle_params
-    params.require(:reviews_cycle).permit(:name, :organisation_id, :questions, :review_request_date, selected_users: [])
+    params.require(:reviews_cycle).permit(:name, :organisation_id, :review_request_date, :question_one, :question_two,
+                                          :question_three, selected_users: [])
   end
 end
