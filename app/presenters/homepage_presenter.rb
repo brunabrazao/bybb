@@ -16,7 +16,7 @@ class HomepagePresenter < BasePresenter
       OpenStruct.new(menu_item: 'Dashboard', link: dashboard_path),
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
-      OpenStruct.new(menu_item: 'Manage Reviews', link: root_url),
+      OpenStruct.new(menu_item: 'Manage Reviews', link: reviews_url),
       OpenStruct.new(menu_item: 'Company Feed', link: feed_path(set_company_feed))
 
     ]
