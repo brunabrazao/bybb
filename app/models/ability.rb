@@ -21,6 +21,11 @@ class Ability
       can :update, Report do |r|
         r.try(:user) == user
       end
+      can :read, Review
+      can :create, Review
+      can :update, Review do |r|
+        r.try(:user) == user
+      end
       can :read, User do |u|
         u.organisation == user.organisation
       end

@@ -3,7 +3,8 @@ class ReviewsCyclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reviews_cycles = ReviewsCycle.all
+    redirect_to dashboard_url unless current_user.role.org_admin?
+    @reviews_cycles = current_organisation.reviews_cycles.all
   end
 
   def show; end
@@ -59,6 +60,7 @@ class ReviewsCyclesController < ApplicationController
   end
 
   def reviews_cycle_params
-    params.require(:reviews_cycle).permit(:name, :organisation_id, :questions)
+    params.require(:reviews_cycle).permit(:name, :organisation_id, :review_request_date, :question_one, :question_two, :question_three, :question_four, :question_five,
+                                          :question_six, :question_seven, :question_eight, :question_nine, :question_ten, selected_users: [])
   end
 end

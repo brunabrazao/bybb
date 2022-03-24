@@ -1,19 +1,45 @@
-<%= form_with(model: reviews_cycle) do |form| %>
-  <% if reviews_cycle.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(reviews_cycle.errors.count, "error") %> prohibited this reviews_cycle from being saved:</h2>
-      <ul>
-        <% reviews_cycle.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+  <div class="form">
+    <%= form_with(model: reviews_cycle) do |form| %>
+      <% if reviews_cycle.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(reviews_cycle.errors.count, "error") %> prohibited this reviews_cycle from being saved:</h2>
+          <ul>
+            <% reviews_cycle.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div>
+        <p>Give this review cycle a name</p>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="mt-5">
+        <p>Add up to 10 questions to this review cycle</p>
+        <%= form.text_field :question_one, class: 'form-control mt-2' %>
+        <%= form.text_field :question_two, class: 'form-control mt-2' %>
+        <%= form.text_field :question_three, class: 'form-control mt-2' %>
+        <%= form.text_field :question_four, class: 'form-control mt-2' %>
+        <%= form.text_field :question_five, class: 'form-control mt-2' %>
+        <%= form.text_field :question_six, class: 'form-control mt-2' %>
+        <%= form.text_field :question_seven, class: 'form-control mt-2' %>
+        <%= form.text_field :question_eight, class: 'form-control mt-2' %>
+        <%= form.text_field :question_nine, class: 'form-control mt-2' %>
+        <%= form.text_field :question_ten, class: 'form-control mt-2' %>
+      </div>
+      <div class="mt-5">
+        <p>Choose a date to send review request to users</p>
+        <span>After this date, you won't be able to edit this form.</span>
+        <p class="mt-2"><%= form.date_field :review_request_date %></p>
+      </div>
+      <div class="mt-5">
+        <p>Select users that will receive an invitation to fill out self-review</p>
+        <%= form.collection_select :selected_users,  User.all.where(organisation: current_user.organisation), :id, :email, {}, { multiple: true, class: 'form-control'} %>
+      </div>
+      <div class="mt-5">
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
