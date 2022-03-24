@@ -8,10 +8,18 @@ class ReviewsCycle < ApplicationRecord
                  :question_six, :question_seven, :question_eight, :question_nine, :question_ten
 
   def locked?
-    review_request_date <= Date.today
+    review_request_date.present? && review_request_date <= Date.today
   end
 
   def unlocked?
     !locked?
+  end
+
+  def enabled?
+    locked? && deadline.present? && deadline >= Date.today
+  end
+
+  def disabled?
+    !enabled
   end
 end
