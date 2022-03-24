@@ -8,13 +8,13 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    @review = Review.new
+    @review = current_user.reviews.build
   end
 
   def edit; end
 
   def create
-    @review = Review.new(review_params)
+    @review = current_user.reviews.build(review_params)
 
     respond_to do |format|
       if @review.save
@@ -55,6 +55,9 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:question_1, :answer_1, :reviews_cycle_id)
+    params.require(:review).permit(:answer_1, :answer_2,
+                                   :answer_3, :answer_4, :answer_5,
+                                   :answer_6, :answer_7, :answer_8, :answer_9, :answer_10,
+                                   :reviews_cycle_id)
   end
 end
