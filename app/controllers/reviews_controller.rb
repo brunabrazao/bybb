@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
 
   def index
-    @reviews = Review.all
+    @reviews = current_user.reviews.all
   end
 
   def show; end
