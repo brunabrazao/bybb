@@ -8,7 +8,9 @@ class ReviewsController < ApplicationController
   def show; end
 
   def new
-    if user_already_submitted_review
+    ensure_review_cycle_is_available
+
+    if user_already_submitted_review?
       redirect_to reviews_url, notice: 'You already submitted a review for lastest review cycle :)'
     else
       @review = current_user.reviews.build
@@ -18,11 +20,13 @@ class ReviewsController < ApplicationController
   def edit; end
 
   def create
+    ensure_review_cycle_is_available
+
     @review = current_user.reviews.build(review_params)
+    @review.reviews_cycle_id = most_recent_review_cycle.id
 
     respond_to do |format|
       if @review.save
-        @review.reviews_cycle_id = latest_review_cycle_id
 
         format.html { redirect_to review_url(@review), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
@@ -54,6 +58,17 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def user_already_submitted_review?
+    return unless current_user.any_active_reviews_cycles?
+
+    user_review_cycle = current_user.reviews.last
+    active_review_cycle = current_user.active_reviews_cycles.last
+
+    user_review_cycle&.reviews_cycle_id == active_review_cycle.id
+  end
+
+  helper_method :most_recent_review_cycle
+
   private
 
   def set_review
@@ -62,20 +77,17 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:answer_one, :answer_two, :answer_three, :answer_four, :answer_five,
-                                   :answer_six, :answer_seven, :answer_eight, :answer_nine, :answer_ten,
-                                   :reviews_cycle_id)
+                                   :answer_six, :answer_seven, :answer_eight, :answer_nine, :answer_ten)
   end
 
-  def latest_review_cycle_id
-    most_recent_review_cycle = current_user.active_reviews_cycles.last
-    return if most_recent_review_cycle.enabled?
-
-    most_recent_review_cycle.id
+  def most_recent_review_cycle
+    current_user.active_reviews_cycles.last
   end
 
-  def user_already_submitted_review
-    current_user_reviews = current_user.reviews
-
-    current_user_reviews.any? && current_user_reviews.last.reviews_cycle_id == latest_review_cycle_id
+  def ensure_review_cycle_is_available
+    unless current_user.any_active_reviews_cycles?
+      redirect_to dashboard_path,
+                  alert: 'There is no reviews cycle available'
+    end
   end
 end
