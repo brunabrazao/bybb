@@ -1,10 +1,12 @@
-<h1>Reviews</h1>
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
+<div class="container py-3 mt-5">
+  <h1>Reviews</h1>
+  <div id="reviews">
+    <% @reviews.each do |review| %>
+      <%= render review %>
+      <p>
+        <%= link_to "Show this review", review %>
+      </p>
+    <% end %>
+  </div>
+  <%= link_to "New review", new_review_path %>
 </div>
-<%= link_to "New review", new_review_path %>

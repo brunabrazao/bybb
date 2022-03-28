@@ -1,56 +1,61 @@
-<% review_question = review.reviews_cycle.questions.compact_blank.values%>
-<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-  <div class="form">
-    <%= form_with(model: review) do |form| %>
-      <% if review.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
-          <ul>
-            <% review.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
+<% if most_recent_review_cycle.enabled? %>
+  <% review_cycle = ReviewsCycle.find_by(id: most_recent_review_cycle.id) %>
+  <% review_question = review_cycle.questions.compact_blank.values %>
+  <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class="form">
+      <%= form_with(model: review) do |form| %>
+        <% if review.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+            <ul>
+              <% review.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="mt-5">
+          <p class="lead" ><%= review_question[0] %></p>
+          <%= form.text_field :answer_one, class: 'form-control mt-2' %>
+          <p class="lead mt-4"><%= review_question[1] %></p>
+          <%= form.text_field :answer_two, class: 'form-control mt-2' %>
+          <p class="lead mt-4"><%= review_question[2] %></p>
+          <%= form.text_field :answer_three, class: 'form-control mt-2' %>
+          <% if review_question[3].present? %>
+            <p class="lead mt-4"><%= review_question[3] %></p>
+            <%= form.text_field :answer_four, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[4].present? %>
+            <p class="lead mt-4"><%= review_question[4] %></p>
+            <%= form.text_field :answer_five, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[5].present? %>
+            <p class="lead mt-4"><%= review_question[5] %></p>
+            <%= form.text_field :answer_six, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[6].present? %>
+            <p class="lead mt-4"><%= review_question[6] %></p>
+            <%= form.text_field :answer_seven, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[7].present? %>
+            <p class="lead mt-4"><%= review_question[7] %></p>
+            <%= form.text_field :answer_eight, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[8].present? %>
+            <p class="lead mt-4"><%= review_question[8] %></p>
+            <%= form.text_field :answer_nine, class: 'form-control mt-2' %>
+          <% end %>
+          <% if review_question[9].present? %>
+            <p class="lead mt-4"><%= review_question[9] %></p>
+            <%= form.text_field :answer_ten, class: 'form-control mt-2' %>
+          <% end %>
+        </div>
+        <div>
+          <%= form.submit %>
         </div>
       <% end %>
-      <div class="mt-5">
-        <p class="lead" ><%= review_question[0] %></p>
-        <%= form.text_field :answer_one, class: 'form-control mt-2' %>
-        <p class="lead mt-4"><%= review_question[1] %></p>
-        <%= form.text_field :answer_two, class: 'form-control mt-2' %>
-        <p class="lead mt-4"><%= review_question[2] %></p>
-        <%= form.text_field :answer_three, class: 'form-control mt-2' %>
-        <% if review_question[3].present? %>
-          <p class="lead mt-4"><%= review_question[3] %></p>
-          <%= form.text_field :answer_four, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[4].present? %>
-          <p class="lead mt-4"><%= review_question[4] %></p>
-          <%= form.text_field :answer_five, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[5].present? %>
-          <p class="lead mt-4"><%= review_question[5] %></p>
-          <%= form.text_field :answer_six, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[6].present? %>
-          <p class="lead mt-4"><%= review_question[6] %></p>
-          <%= form.text_field :answer_seven, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[7].present? %>
-          <p class="lead mt-4"><%= review_question[7] %></p>
-          <%= form.text_field :answer_eight, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[8].present? %>
-          <p class="lead mt-4"><%= review_question[8] %></p>
-          <%= form.text_field :answer_nine, class: 'form-control mt-2' %>
-        <% end %>
-        <% if review_question[9].present? %>
-          <p class="lead mt-4"><%= review_question[9] %></p>
-          <%= form.text_field :answer_ten, class: 'form-control mt-2' %>
-        <% end %>
-      </div>
-      <div>
-        <%= form.submit %>
-      </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <p>There's no active reviews cycle right now.</p>
+<% end %>
