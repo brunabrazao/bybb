@@ -22,4 +22,16 @@ class User < ApplicationRecord
   def manager_assigned?
     manager_id.present?
   end
+
+  def any_active_reviews_cycles?
+    active_reviews_cycles.count >= 1
+  end
+
+  def reviews_cycles_list
+    reviews_cycles.where.not(deadline: nil).where.not(review_request_date: nil)
+  end
+
+  def active_reviews_cycles
+    reviews_cycles_list.where('deadline >= ?', Date.today)
+  end
 end

@@ -13,13 +13,16 @@ class ReviewsCyclesController < ApplicationController
     @reviews_cycle = current_user.organisation.reviews_cycles.build
   end
 
-  def edit; end
+  def edit
+    redirect_to dashboard_path, alert: 'You no longer can edit this review cycle' if @reviews_cycle.locked?
+  end
 
   def create
     @reviews_cycle = current_user.organisation.reviews_cycles.build(reviews_cycle_params)
 
     respond_to do |format|
       if @reviews_cycle.save
+        assign_users_to_review_cycle(@reviews_cycle)
         format.html { redirect_to reviews_cycle_url(@reviews_cycle), notice: 'Reviews cycle was successfully created.' }
         format.json { render :show, status: :created, location: @reviews_cycle }
       else
@@ -60,7 +63,19 @@ class ReviewsCyclesController < ApplicationController
   end
 
   def reviews_cycle_params
-    params.require(:reviews_cycle).permit(:name, :organisation_id, :review_request_date, :question_one, :question_two, :question_three, :question_four, :question_five,
-                                          :question_six, :question_seven, :question_eight, :question_nine, :question_ten, selected_users: [])
+    params.require(:reviews_cycle).permit(:name, :organisation_id, :review_request_date, :deadline, :question_one,
+                                          :question_two, :question_three, :question_four, :question_five,
+                                          :question_six, :question_seven, :question_eight,
+                                          :question_nine, :question_ten, selected_users: [])
+  end
+
+  def assign_users_to_review_cycle(cycle)
+    user_ids = cycle.selected_users.reject(&:empty?)
+
+    user_list = user_ids.map do |u|
+      User.find_by(id: u.to_i)
+    end
+
+    cycle.users << user_list
   end
 end
