@@ -78,10 +78,11 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'rails-erd'
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
 end
 
-gem "cancancan", "~> 3.3"
+gem 'cancancan', '~> 3.3'
