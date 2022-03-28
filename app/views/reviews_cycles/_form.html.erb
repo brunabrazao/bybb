@@ -11,12 +11,12 @@
           </ul>
         </div>
       <% end %>
-      <div>
+      <div class="mt-4">
         <p>Give this review cycle a name</p>
         <%= form.text_field :name, class: 'form-control' %>
       </div>
       <div class="mt-5">
-        <p>Add up to 10 questions to this review cycle</p>
+        <p>Add up to 10 questions to this review cycle. You have to add at least 3 questions.</p>
         1.<%= form.text_field :question_one, class: 'form-control mt-2' %>
         2.<%= form.text_field :question_two, class: 'form-control mt-2' %>
         3.<%= form.text_field :question_three, class: 'form-control mt-2' %>

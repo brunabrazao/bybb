@@ -1,1 +1,1 @@
-Time::DATE_FORMATS[:custom_datetime] = '%d %m %Y'
+Time::DATE_FORMATS[:custom_datetime] = '%a, %e %b %Y'

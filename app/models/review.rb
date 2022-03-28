@@ -8,7 +8,4 @@ class Review < ApplicationRecord
   validates :answer_one, presence: true
   validates :answer_two, presence: true
   validates :answer_three, presence: true
-  validates :review_request_date, presence: true
-  validates :deadline, presence: true
-  validates :name, presence: true
 end

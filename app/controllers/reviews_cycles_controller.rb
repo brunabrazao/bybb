@@ -3,14 +3,19 @@ class ReviewsCyclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    redirect_to dashboard_url unless current_user.role.org_admin?
+    redirect_to dashboard_url unless current_user.role.org_admin? || current_user.role.admin?
     @reviews_cycles = current_organisation.reviews_cycles.all
   end
 
   def show; end
 
   def new
-    @reviews_cycle = current_user.organisation.reviews_cycles.build
+    if org_has_active_reviews_cycles?
+      redirect_to reviews_cycles_url,
+                  notice: 'You already have a reviews cycle enabled. You can only have one reviews cycle enabled at a time :)'
+    else
+      @reviews_cycle = current_user.organisation.reviews_cycles.build
+    end
   end
 
   def edit
@@ -77,5 +82,9 @@ class ReviewsCyclesController < ApplicationController
     end
 
     cycle.users << user_list
+  end
+
+  def org_has_active_reviews_cycles?
+    current_organisation.reviews_cycles&.any? { |cycle| cycle.enabled? }
   end
 end

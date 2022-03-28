@@ -11,6 +11,9 @@ class ReviewsCycle < ApplicationRecord
   validates :question_one, presence: true
   validates :question_two, presence: true
   validates :question_three, presence: true
+  validates :review_request_date, presence: true
+  validates :deadline, presence: true
+  validates :name, presence: true
 
   def locked?
     review_request_date.present? && review_request_date <= Date.today
