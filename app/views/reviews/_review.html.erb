@@ -1,10 +1,45 @@
-<div id="<%= dom_id review %>">
-  <p>
-    <strong>Answer 1:</strong>
-    <%= review.answer_one %>
-  </p>
-  <p>
-    <strong>Review cycle:</strong>
-    <%= review.reviews_cycle_id %>
-  </p>
+<% review_question = review.reviews_cycle.questions.compact_blank.values %>
+<div id="<%= dom_id review %>" class="mt-5">
+  <div class="bg-light p-5 rounded">
+    <div class="mt-3">
+      <h3><%= review_question[0] %></h3>
+      <p class="mt-2"><%= review.answer_one %></p>
+    </div>
+    <div  class="mt-5">
+      <h3><%= review_question[1] %></h3>
+      <p class="mt-2"><%= review.answer_two %></p>
+    </div>
+    <div  class="mt-5">
+      <h3><%= review_question[2] %></h3>
+      <p class="mt-2"><%= review.answer_three %></p>
+    </div>
+    <% if review_question[3].present? %>
+      <h3><%= review_question[3] %></h3>
+      <p class="mt-2"><%= review.answer_four %></p>
+    <% end %>
+    <% if review_question[4].present? %>
+      <h3><%= review_question[4] %></h3>
+      <p class="mt-2"><%= review.answer_five %></p>
+    <% end %>
+    <% if review_question[5].present? %>
+      <h3><%= review_question[5] %></h3>
+      <p class="mt-2"><%= review.answer_six %></p>
+    <% end %>
+    <% if review_question[6].present? %>
+      <h3><%= review_question[6] %></h3>
+      <p class="mt-2"><%= review.answer_seven %></p>
+    <% end %>
+    <% if review_question[7].present? %>
+      <h3><%= review_question[7] %></h3>
+      <p class="mt-2"><%= review.answer_eight %></p>
+    <% end %>
+    <% if review_question[8].present? %>
+      <h3><%= review_question[8] %></h3>
+      <p class="mt-2"><%= review.answer_nine %></p>
+    <% end %>
+    <% if review_question[9].present? %>
+      <h3><%= review_question[9] %></h3>
+      <p class="mt-2"><%= review.answer_ten %></p>
+    <% end %>
+  </div>
 </div>

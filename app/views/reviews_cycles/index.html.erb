@@ -1,10 +1,40 @@
-<h1>Reviews cycles</h1>
-<div id="reviews_cycles">
-  <% @reviews_cycles.each do |reviews_cycle| %>
-    <%= render reviews_cycle %>
-    <p>
-      <%= link_to "Show this reviews cycle", reviews_cycle %>
-    </p>
-  <% end %>
+<div class="container py-3">
+  <div class="mt-5">
+    <% if @reviews_cycles.empty? %>
+      You don't have any active reviews cycle
+    <% else %>
+      <h1>Manage your reviews cycles</h1>
+      <div id="reviews_cycles">
+        <%= link_to "New reviews cycle", new_reviews_cycle_path, class: 'btn btn-success' %>
+        <div class="container py-3">
+          <div class="mt-5">
+            <% @reviews_cycles.each do |reviews_cycle|%>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Review cycle</th>
+                      <th scope="col">Released to users on</th>
+                      <th scope="col">Deadline for users</th>
+                      <th scope="col">Total users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><%= reviews_cycle.id%></th>
+                      <td><%= link_to "#{reviews_cycle.name}", reviews_cycle, class: 'text-decoration-none' %> </td>
+                      <td><%= reviews_cycle.created_at.to_formatted_s(:custom_datetime) %></td>
+                      <td><%= reviews_cycle.deadline.strftime('%a, %e %b %Y') %></td>
+                      <td><%= reviews_cycle.selected_users.count %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-<%= link_to "New reviews cycle", new_reviews_cycle_path %>

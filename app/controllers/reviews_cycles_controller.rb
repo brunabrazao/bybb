@@ -1,9 +1,9 @@
 class ReviewsCyclesController < ApplicationController
   before_action :set_reviews_cycle, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
-    redirect_to dashboard_url unless current_user.role.org_admin? || current_user.role.admin?
     @reviews_cycles = current_organisation.reviews_cycles.all
   end
 
@@ -12,7 +12,8 @@ class ReviewsCyclesController < ApplicationController
   def new
     if org_has_active_reviews_cycles?
       redirect_to reviews_cycles_url,
-                  notice: 'You already have a reviews cycle enabled. You can only have one reviews cycle enabled at a time :)'
+                  alert: "You already have a reviews cycle enabled until #{current_organisation.reviews_cycles.last.deadline.strftime('%a, %e %b %Y')}.
+                          You can only have one reviews cycle enabled at a time. Speak to a BYBB member to upgrade. :)"
     else
       @reviews_cycle = current_user.organisation.reviews_cycles.build
     end
@@ -52,14 +53,7 @@ class ReviewsCyclesController < ApplicationController
     end
   end
 
-  def destroy
-    @reviews_cycle.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reviews_cycles_url, notice: 'Reviews cycle was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  def destroy; end
 
   private
 

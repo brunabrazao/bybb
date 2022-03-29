@@ -1,3 +1,4 @@
+<% user_presenter = UserPresenter.new(current_user) %>
 <div class="container py-3">
   <div class="mt-5">
     <h1>Your weekly reports</h1>
@@ -38,9 +39,9 @@
               <p>You haven't been assigned to a line manager yet and can't create a report.</p>
             <% end %>
           </div>
-          <% if reports_for_current_user_manager.any? %>
+          <% if user_presenter.reports_for_current_user_as_manager.any? %>
             <h1>Your direct reports</h1>
-            <% reports_for_current_user_manager.each do |report| %>
+            <% user_presenter.reports_for_current_user_as_manager.each do |report| %>
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <thead>

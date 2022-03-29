@@ -1,11 +1,15 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @reviews = current_user.reviews.all
   end
 
-  def show; end
+  def show
+    redirect_to root_url unless has_permission_to_view_reviews?
+  end
 
   def new
     ensure_review_cycle_is_available
@@ -17,7 +21,9 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    redirect_to reviews_path unless @review.reviews_cycle.deadline < Date.today
+  end
 
   def create
     ensure_review_cycle_is_available
@@ -50,6 +56,8 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    return unless @review.reviews_cycle.deadline < Date.today
+
     @review.destroy
 
     respond_to do |format|
@@ -89,5 +97,9 @@ class ReviewsController < ApplicationController
       redirect_to dashboard_path,
                   alert: 'There is no reviews cycle available'
     end
+  end
+
+  def has_permission_to_view_reviews?
+    @review.user == current_user || @review.user.manager_id == current_user.id
   end
 end
