@@ -1,3 +1,4 @@
+<% user_presenter = UserPresenter.new(@current_user)%>
 <div class="container py-3">
   <div class="mt-5">
     <h1>Manage your reviews</h1>
@@ -33,3 +34,26 @@
       <div class="mt-5">You don't have any reviews to display</div>
     <% end %>
   </div>
+  <% if user_presenter.reviews_for_current_user_as_manager.any? %>
+    <h1>Your direct reports</h1>
+    <% user_presenter.reviews_for_current_user_as_manager.each do |review| %>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Employee</th>
+              <th scope="col">Submitted on</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><%= review.id%></th>
+              <td><%= link_to "#{review.user.email}", review, class: 'text-decoration-none' %></td>
+              <td><%= link_to "#{review.created_at.to_s(:custom_datetime) }", review, class: 'text-decoration-none' %> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end%>

@@ -55,6 +55,7 @@ class Ability
       can :create, Report
       can :create, Post
       can :create, Review
+      can :read, Review
       can :update, Review do |r|
         r.try(:user) == user
       end

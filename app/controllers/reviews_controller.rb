@@ -7,7 +7,9 @@ class ReviewsController < ApplicationController
     @reviews = current_user.reviews.all
   end
 
-  def show; end
+  def show
+    redirect_to root_url unless has_permission_to_view_reviews?
+  end
 
   def new
     ensure_review_cycle_is_available
@@ -95,5 +97,9 @@ class ReviewsController < ApplicationController
       redirect_to dashboard_path,
                   alert: 'There is no reviews cycle available'
     end
+  end
+
+  def has_permission_to_view_reviews?
+    @review.user == current_user || @review.user.manager_id == current_user.id
   end
 end
