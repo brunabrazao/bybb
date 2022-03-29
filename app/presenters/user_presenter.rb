@@ -11,4 +11,8 @@ class UserPresenter < BasePresenter
   def reviews_for_current_user_as_manager
     Review.where(user: User.where(manager_id: @current_user.id))
   end
+
+  def reports_for_current_user_as_manager
+    Report.where(user: User.where(manager_id: @current_user.id))
+  end
 end
