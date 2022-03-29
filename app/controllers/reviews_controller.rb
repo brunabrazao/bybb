@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @reviews = current_user.reviews.all
@@ -17,7 +19,9 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    redirect_to reviews_path unless @review.reviews_cycle.deadline < Date.today
+  end
 
   def create
     ensure_review_cycle_is_available
@@ -50,6 +54,8 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    return unless @review.reviews_cycle.deadline < Date.today
+
     @review.destroy
 
     respond_to do |format|
