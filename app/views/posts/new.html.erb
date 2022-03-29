@@ -5,7 +5,7 @@
     <%= render "form", post: @post %>
     <br>
     <div>
-      <%= link_to "Back to posts", posts_path %>
+      <%= link_to "Back to company feed", feed_path(current_user.organisation.feed.id) %>
     </div>
   </div>
 </div>
