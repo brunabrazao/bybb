@@ -10,6 +10,7 @@ class Ability
       can :update, Organisation do |org|
         org.users.include?(user)
       end
+      can :create, Post
       can :read, Feed do |f|
         f.organisation_id == user.organisation_id
       end
@@ -26,6 +27,10 @@ class Ability
       can :update, Review do |r|
         r.try(:user) == user
       end
+
+      can :destroy, Review do |r|
+        r.try(:user) == user
+      end
       can :read, User do |u|
         u.organisation == user.organisation
       end
@@ -35,6 +40,11 @@ class Ability
       can :destroy, User do |u|
         u.organisation == user.organisation
       end
+      can :create, ReviewsCycle
+      can :read, ReviewsCycle do |rc|
+        rc.organisation == user.organisation
+      end
+
     elsif user.role.org_member?
       can :update, Report do |r|
         r.try(:user) == user
@@ -43,6 +53,14 @@ class Ability
         f.organisation_id == user.organisation_id
       end
       can :create, Report
+      can :create, Post
+      can :create, Review
+      can :update, Review do |r|
+        r.try(:user) == user
+      end
+      can :destroy, Review do |r|
+        r.try(:user) == user
+      end
     end
     # Define abilities for the passed in user here. For example:
     #
