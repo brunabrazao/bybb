@@ -49,29 +49,6 @@ class UsersController < ApplicationController
     end
   end
 
-  helper_method :user_options, :user_manager_email, :organisation_options
-
-  def user_options
-    if @user.organisation.users.length <= 1 && @user.manager_id.nil?
-      ['No users in this organisation']
-    else
-      User.all.where(organisation: current_user.organisation).map do |user|
-        [user.email, user.id]
-      end
-    end
-  end
-
-  def organisation_options
-    Organisation.all.map do |org|
-      [org.title, org.id]
-    end
-  end
-
-  def user_manager_email
-    find_user_id = User.find_by(manager_id: @user.manager_id).manager_id
-    User.find_by(id: find_user_id).email
-  end
-
   private
 
   def set_user
