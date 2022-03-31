@@ -39,7 +39,7 @@
         <p class="mt-2"><%= form.date_field :deadline %></p>
       </div>
       <div class="mt-5">
-        <p>Select users that will receive an invitation to fill out self-review</p>
+        <p>Select users that will receive an invitation to fill out this review.</p>
         <%= form.collection_select :selected_users, User.all.where(organisation: current_user.organisation), :id, :email, {}, { multiple: true, class: 'form-control'} %>
       </div>
       <div class="mt-5">
