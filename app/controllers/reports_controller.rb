@@ -57,12 +57,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  helper_method :reports_for_current_user_manager
-
-  def reports_for_current_user_manager
-    Report.where(user: User.where(manager_id: current_user.id))
-  end
-
   private
 
   def has_permission_to_view_reports?
