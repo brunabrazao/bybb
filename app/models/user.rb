@@ -34,4 +34,8 @@ class User < ApplicationRecord
   def active_reviews_cycles
     reviews_cycles_list.where('deadline >= ?', Date.today)
   end
+
+  def manager_email(line_manager_id)
+    User.find_by(id: line_manager_id).email
+  end
 end
