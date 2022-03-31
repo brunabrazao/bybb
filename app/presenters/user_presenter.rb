@@ -22,6 +22,14 @@ class UserPresenter < BasePresenter
     end
   end
 
+  def role_options
+    if @current_user.role.admin?
+      Role.all.map { |r| [r.name, r.id] }
+    else
+      Role.where.not(name: 'SuperAdmin').map { |r| [r.name, r.id] }
+    end
+  end
+
   def user_options
     if @current_user.organisation.users.length <= 1 && @current_user.manager_id.nil?
       ['No users in this organisation']
