@@ -1,10 +1,10 @@
 <% dashboard_presenter = DashboardsPresenter.new %>
 <div class="container py-3">
   <div class="mt-5">
-    <h1>Dashboard</h1>
-    <h5>Your permission: <%= current_user.role.name %></h5>
-    <h5>Your company: <%= current_user.organisation&.title %></h5>
-    <h5>Your line manager: <%= current_user.manager_email(current_user.manager_id) if current_user.manager_id.present? %></h5>
+    <p class="lead">Hello, <%= current_user.email %> &#x1F44B;</p>
+    <p class="font-weight-bold"> Your permission: &#x1F449; &nbsp; <%= current_user.role.name%></p>
+    <p class="font-weight-bold">Your company: &#x1F449; &nbsp;<%= current_user.organisation.title%></p>
+    <p class="font-weight-bold">Your line manager: &#x1F449; &nbsp; <%= current_user.manager_email(current_user.manager_id) if current_user.manager_id.present? %></p>
     <%= render partial: 'grid', locals: { items: dashboard_presenter.org_member_items }%>
   </div>
 </div>
