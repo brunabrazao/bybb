@@ -5,6 +5,10 @@ class Organisation < ApplicationRecord
 
   before_save :assign_feed
 
+  validates :title, presence: true
+  validates :short_description, presence: true
+  validates :licenses, presence: true
+
   def remaining_licenses_count
     if licenses.nil?
       0
