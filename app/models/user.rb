@@ -7,13 +7,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
-  has_many :reports
+  has_many :reports, dependent: :destroy
   belongs_to :role, optional: true
   belongs_to :organisation, optional: true
   before_save :assign_role
-  has_many :posts
-  has_many :reviews
-  has_and_belongs_to_many :reviews_cycles
+  has_many :posts, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_and_belongs_to_many :reviews_cycles, dependent: :destroy
 
   def assign_role
     self.role = Role.find_by name: 'OrgMember' if role.nil?
