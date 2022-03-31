@@ -4,8 +4,8 @@
   <div class="mt-5">
     <h1>Dashboard</h1>
     <h5>Your permission: <%= current_user.role.name %></h5>
-    <h5>Your company: <%= current_user.organisation.title%></h5>
-    <h5>Your line manager: <%= user_presenter.user_manager_email %></h5>
+    <h5>Your company: <%= current_user.organisation&.title %></h5>
+    <h5>Your line manager: <%= user_presenter.user_manager_email if current_user.manager_id.present? %></h5>
     <%= render partial: 'grid', locals: { items: dashboard_presenter.org_member_items }%>
   </div>
 </div>

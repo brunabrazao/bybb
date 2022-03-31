@@ -14,24 +14,24 @@
           <% if current_user.manager_id.present?  %>
             <div class="mt-5"id="reports">
               <% if @reports.any? %>
-                <% @reports.each do |report| %>
-                  <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">ID</th>
-                          <th scope="col">Submitted on</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Submitted on</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @reports.each do |report| %>
                         <tr>
                           <th scope="row"><%= report.id%></th>
                           <td><%= link_to "#{report.created_at.to_s(:custom_datetime) }", report, class: 'text-decoration-none' %> </td>
                         </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                <% end %>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
               <% end%>
               <div class="mt-5">
               </div>
@@ -40,27 +40,27 @@
             <% end %>
           </div>
           <% if user_presenter.reports_for_current_user_as_manager.any? %>
-            <h1>Your direct reports</h1>
-            <% user_presenter.reports_for_current_user_as_manager.each do |report| %>
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Employee</th>
-                      <th scope="col">Submitted on</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+            <h1>People you manage</h1>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Submitted on</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% user_presenter.reports_for_current_user_as_manager.each do |report| %>
                     <tr>
                       <th scope="row"><%= report.id%></th>
                       <td><%= link_to "#{report.user.email}", report, class: 'text-decoration-none' %></td>
                       <td><%= link_to "#{report.created_at.to_s(:custom_datetime) }", report, class: 'text-decoration-none' %> </td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-            <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           <% end%>
         </div>
       </div>

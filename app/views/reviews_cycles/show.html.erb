@@ -1,6 +1,7 @@
-<%= render @reviews_cycle %>
-<div>
-  <%= link_to "Edit this reviews cycle", edit_reviews_cycle_path(@reviews_cycle) %> |
-  <%= link_to "Back to reviews cycles", reviews_cycles_path %>
-  <%= button_to "Destroy this reviews cycle", @reviews_cycle, method: :delete %>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1>Reviews cycle</h1>
+    <%= link_to "Back to reviews cycles", reviews_cycles_path, class: 'btn btn-success mt-3 mb-3' %>
+    <%= render @reviews_cycle %>
+  </div>
 </div>

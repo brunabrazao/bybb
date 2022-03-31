@@ -11,4 +11,10 @@
     <strong>Nominated users count:</strong>
     <%= reviews_cycle.selected_users.count%>
   </p>
+  <p>
+    <strong>Users</strong>
+    <% reviews_cycle.users.map do |user| %>
+      <li><%= user.email%></li>
+    <% end %>
+  </p>
 </div>
