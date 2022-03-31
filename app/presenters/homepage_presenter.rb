@@ -38,7 +38,7 @@ class HomepagePresenter < BasePresenter
       OpenStruct.new(carousel_item_class: 'second-carousel-item',
                      header: 'Your partner for continuous performance management',
                      copy: 'Effectively manage expectations through open communication',
-                     cta: 'Book a demo')
+                     cta: 'See how it works')
     ]
   end
 
