@@ -1,17 +1,17 @@
 <div class="form-group">
   <%= form_with(model: organisation) do |form| %>
     <div>
-      <%= form.label :title, style: "display: block" %>
-      <%= form.text_field :title %>
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
     </div>
     <div class="mt-3">
-      <%= form.label :short_description, style: "display: block" %>
-      <%= form.text_area :short_description %>
+      <%= form.label :short_description %>
+      <%= form.text_area :short_description, class: 'form-control' %>
     </div>
     <% if can? :manage, Organisation %>
       <div class="mt-3">
-        <%= form.label :licenses, style: "display: block" %>
-        <%= form.text_area :licenses %>
+        <%= form.label :licenses %>
+        <%= form.text_area :licenses, class: 'form-control' %>
       </div>
     <% end %>
     <div class="mt-5">
