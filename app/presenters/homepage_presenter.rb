@@ -16,7 +16,8 @@ class HomepagePresenter < BasePresenter
       OpenStruct.new(menu_item: 'Create Weekly Report', link: new_report_path),
       OpenStruct.new(menu_item: 'Manage Reports', link: reports_path),
       OpenStruct.new(menu_item: 'Manage Reviews', link: reviews_url),
-      OpenStruct.new(menu_item: 'Company Feed', link: feed_path(set_company_feed))
+      OpenStruct.new(menu_item: 'Company Feed',
+                     link: (feed_path(set_company_feed) if @current_user.organisation.present?))
 
     ]
 
@@ -49,13 +50,13 @@ class HomepagePresenter < BasePresenter
                      sub_header: 'empowering people',
                      copy: 'Understand what makes your team thrive and unlock peak performance with an open,
                            transparent and human-centred approach.',
-                     img: 'homepage/pexels-1552617'),
+                     img: 'homepage/pexels-1552617.jpg'),
       OpenStruct.new(featurette_item_class: 'order-md-2',
                      header: 'Technology is not the opposite of',
                      sub_header: 'human',
                      copy: 'A centralised solution that enable line managers, human resources teams and organisations
                            to stay connected with their people helping them to succeed.',
-                     img: 'homepage/pexels-3184357')
+                     img: 'homepage/pexels-3184357.jpg')
     ]
   end
 
