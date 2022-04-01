@@ -1,9 +1,8 @@
-<% user_presenter = UserPresenter.new(current_user) %>
 <div class="container py-3">
   <div class="mt-5">
     <div class="text-center">
       <h1 class="mb-4">Create this week's report</h1>
-      <p class="mb-5">Only you and your line manager can see your report | Your line manager: <%= user_presenter.user_manager_email %> </p>
+      <p class="mb-5">Only you and your line manager can see your report | Your line manager: <%= current_user.manager_email(current_user.manager_id) %> </p>
     </div>
     <%= render "form", report: @report %>
     <div class="mt-3">

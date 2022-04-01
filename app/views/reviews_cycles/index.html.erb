@@ -1,11 +1,11 @@
 <div class="container py-3">
   <div class="mt-5">
+    <h1>Manage your reviews cycles</h1>
+    <%= link_to "New reviews cycle", new_reviews_cycle_path, class: 'btn btn-success mt-3 mb-3' %>
     <% if @reviews_cycles.empty? %>
-      You don't have any active reviews cycle
+      <p>You don't have any active reviews cycle</p>
     <% else %>
-      <h1>Manage your reviews cycles</h1>
       <div id="reviews_cycles">
-        <%= link_to "New reviews cycle", new_reviews_cycle_path, class: 'btn btn-success' %>
         <div class="container py-3">
           <div class="mt-5">
             <% @reviews_cycles.each do |reviews_cycle|%>

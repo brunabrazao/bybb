@@ -27,11 +27,17 @@ body {
   margin-bottom: 5rem;
 }
 
-.first-carousel-item {
-  background: url("homepage/puzzle-yellow.jpg") no-repeat center center fixed;
+.second-carousel-item {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background: url("homepage/pexels-3482443.jpg");
 }
 
-.second-carousel-item {
+.first-carousel-item {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-image: url("homepage/yellow-abstract.jpg");
 }
 

@@ -1,10 +1,11 @@
-<h1>Editing role</h1>
-
-<%= render "form", role: @role %>
-
-<br>
-
-<div>
-  <%= link_to "Show this role", @role %> |
-  <%= link_to "Back to roles", roles_path %>
+<div class="container py-3">
+  <div class="mt-5">
+    <h1 class="text-center">Editing role</h1>
+    <%= render "form", role: @role %>
+    <br>
+    <div class="text-center">
+      <%= link_to "Show this role", @role %> |
+      <%= link_to "Back to roles", roles_path %>
+    </div>
+  </div>
 </div>

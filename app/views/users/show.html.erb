@@ -1,4 +1,3 @@
-<% user_presenter = UserPresenter.new(@user) %>
 <div class="container py-3">
   <div class="mt-5">
     <h1>Manage User</h1>
@@ -26,7 +25,7 @@
     <hr>
     <h2>Manager associated for this user</h2>
     <% if @user.manager_assigned? %>
-      <li><%= user_presenter.user_manager_email %></li>
+      <li><%= current_user.manager_email(current_user.manager_id) %></li>
     <% else %>
       <p>No manager associated for this user. Please click on 'Edit this user' to add a manager</p>
     <% end %>

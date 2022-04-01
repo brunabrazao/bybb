@@ -1,10 +1,14 @@
-<%= render @role %>
-<p>
-  <strong>Associated users:</strong>
-  <%= @associated_users %>
-</p>
-<div>
-  <%= link_to "Edit this role", edit_role_path(@role) %> |
-  <%= link_to "Back to roles", roles_path %>
-  <%= button_to "Destroy this role", @role, method: :delete %>
+<div class="container py-3">
+  <div class="mt-5 text-center">
+    <%= render @role %>
+    <p>
+      <strong>Associated users:</strong>
+      <%= @associated_users %>
+    </p>
+    <div class="text-center">
+      <%= link_to "Edit this role", edit_role_path(@role) %> |
+      <%= link_to "Back to roles", roles_path %>
+      <%= button_to "Destroy this role", @role, method: :delete, class: 'btn btn-danger mt-5' %>
+    </div>
+  </div>
 </div>

@@ -11,6 +11,9 @@ class Ability
         org.users.include?(user)
       end
       can :create, Post
+      can :destroy, Post do |p|
+        p.try(:user) == user
+      end
       can :read, Feed do |f|
         f.organisation_id == user.organisation_id
       end
@@ -54,6 +57,9 @@ class Ability
       end
       can :create, Report
       can :create, Post
+      can :destroy, Post do |p|
+        p.try(:user) == user
+      end
       can :create, Review
       can :read, Review
       can :update, Review do |r|

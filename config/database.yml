@@ -53,3 +53,4 @@ production:
   database: bybb_production
   username: bybb
   password: <%= ENV["BYBB_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

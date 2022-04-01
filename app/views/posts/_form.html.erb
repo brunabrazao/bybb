@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center mt-5 form-group">
   <%= form_with(model: post) do |form| %>
     <% if post.errors.any? %>
-      <div style="color: red">
-        <p><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</p>
+      <div class="text-danger">
+        <p class="font-weight-bold"><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</p>
         <ul>
           <% post.errors.each do |error| %>
             <li><%= error.full_message %></li>
