@@ -81,13 +81,13 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'bybb-test.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
+    user_name: ENV['SENDGRID_USERNAME'], # This is the string literal 'apikey', NOT the ID of your API key
+    password: ENV['SENDGRID_API_KEY'], # This is the secret sendgrid API key which was issued during API key creation
+    domain: 'bybb-test.herokuapp.com',
     address: 'smtp.sendgrid.net',
     port: 587,
-    enable_starttls_auto: true,
     authentication: :plain,
-    domain: 'bybb-test.herokuapp.com'
+    enable_starttls_auto: true
   }
 
   # Use a different logger for distributed setups.
