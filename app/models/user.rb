@@ -35,9 +35,17 @@ class User < ApplicationRecord
     reviews_cycles_list.where('deadline >= ?', Date.today)
   end
 
+  def active_reviews_cycle_id
+    active_reviews_cycles.last.id
+  end
+
   def manager_email(line_manager_id)
     return nil unless line_manager_id
 
     User.find_by(id: line_manager_id).email
+  end
+
+  def review_submitted_for_latest_reviews_cycle?(review_cycle_id)
+    reviews.any? && reviews.last.reviews_cycle_id == review_cycle_id
   end
 end
