@@ -5,9 +5,9 @@
       <h2 class="mb-3">Your dashboard</h2>
       <p class="lead">Hello, <%= current_user.email %> &#x1F44B;</p>
       <% if current_user.any_active_reviews_cycles? && !current_user.review_submitted_for_latest_reviews_cycle?(current_user.active_reviews_cycle_id) %>
-        <p>&#x1F449; &nbsp;You've been invited to send a <%= link_to "review", new_review_path, class: 'text-decoration-none' %> by <%= presenter.formatted_date_time(current_user.reviews_cycles&.last.deadline) %> <span class="badge badge-new">TO DO</span></p>
+        <p>&#x1F449; &nbsp;You've been invited to send a <%= link_to "review", new_review_path, class: 'text-decoration-none' %> by <%= dashboard_presenter.formatted_date_time(current_user.reviews_cycles&.last.deadline) %> <span class="badge badge-new">TO DO</span></p>
       <% end %>
-      <% if !presenter.report_submitted_this_week?(current_user.reports) %>
+      <% if !dashboard_presenter.report_submitted_this_week?(current_user.reports) %>
         <p> &#x1F449; &nbsp;You've to submit this week's <%= link_to "report", new_report_path, class: 'text-decoration-none' %> <span class="badge badge-new">TO DO</span></p>
       <% end %>
       <p>&#x1F449; &nbsp;Your permission: <%= current_user.role.name%></p>
