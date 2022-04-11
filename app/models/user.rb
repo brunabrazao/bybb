@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def any_active_reviews_cycles?
-    active_reviews_cycles.count >= 1
+    active_reviews_cycles.count >= 1 && active_reviews_cycles.last.enabled?
   end
 
   def reviews_cycles_list
