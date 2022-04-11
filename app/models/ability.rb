@@ -48,6 +48,10 @@ class Ability
         rc.organisation == user.organisation
       end
 
+      can :update, ReviewsCycle do |rc|
+        rc.organisation == user.organisation
+      end
+
     elsif user.role.org_member?
       can :update, Report do |r|
         r.try(:user) == user
