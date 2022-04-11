@@ -1,6 +1,6 @@
 class ReviewsCycle < ApplicationRecord
   belongs_to :organisation
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :users
 
   serialize :questions, Hash
