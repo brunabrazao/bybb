@@ -29,6 +29,7 @@ class ReviewsCyclesController < ApplicationController
     respond_to do |format|
       if @reviews_cycle.save
         assign_users_to_review_cycle(@reviews_cycle)
+        send_notification_by_email
         format.html { redirect_to reviews_cycle_url(@reviews_cycle), notice: 'Reviews cycle was successfully created.' }
         format.json { render :show, status: :created, location: @reviews_cycle }
       else
@@ -41,6 +42,7 @@ class ReviewsCyclesController < ApplicationController
   def update
     respond_to do |format|
       if @reviews_cycle.update(reviews_cycle_params)
+        send_notification_by_email
 
         format.html do
           redirect_to reviews_cycle_url(@reviews_cycle), notice: 'Reviews cycle was successfully updated.'
@@ -80,5 +82,11 @@ class ReviewsCyclesController < ApplicationController
 
   def org_has_active_reviews_cycles?
     current_organisation.reviews_cycles&.any? { |cycle| cycle.enabled? }
+  end
+
+  def send_notification_by_email
+    return unless @reviews_cycle.enabled?
+
+    ReviewsCycleMailer.notify_user(@reviews_cycle).deliver_now
   end
 end

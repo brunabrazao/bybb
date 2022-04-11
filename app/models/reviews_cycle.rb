@@ -15,6 +15,8 @@ class ReviewsCycle < ApplicationRecord
   validates :deadline, presence: true
   validates :name, presence: true
 
+  after_save :update_notification_status
+
   def locked?
     review_request_date.present? && review_request_date <= Date.today
   end
@@ -27,7 +29,11 @@ class ReviewsCycle < ApplicationRecord
     locked? && deadline.present? && deadline >= Date.today
   end
 
-  def disabled?
-    !enabled
+  def update_notification_status
+    if enabled?
+      true
+    else
+      false
+    end
   end
 end
