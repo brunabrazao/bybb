@@ -1,17 +1,18 @@
 <% dashboard_presenter = DashboardsPresenter.new %>
 <div class="container py-3">
   <div class="mt-5">
-    <h1>Dashboard</h1>
-    <p class="lead">Hello, <%= current_user.email %> &#x1F44B;</p>
-    <p class="font-weight-bold"> Your permission: &#x1F449; &nbsp; <%= current_user.role.name%></p>
-    <p class="font-weight-bold">Your company: &#x1F449; &nbsp;<%= current_user.organisation&.title%></p>
-    <p class="font-weight-bold">Your line manager: &#x1F449; &nbsp; <%= current_user.manager_email(current_user.manager_id) if current_user.manager_id.present? %></p>
+    <div class=" p-5 text-white bg-dark rounded-3">
+      <h2 class="mb-3">Your dashboard</h2>
+      <p class="lead">Hello, <%= current_user.email %> &#x1F44B;</p>
+      <% if current_user.any_active_reviews_cycles? && !current_user.review_submitted_for_latest_reviews_cycle?(current_user.active_reviews_cycle_id) %>
+        <p>&#x1F449; &nbsp;You've been invited to send a <%= link_to "review", new_review_path, class: 'text-decoration-none' %> by <%= presenter.formatted_date_time(current_user.reviews_cycles&.last.deadline) %> <span class="badge badge-new">TO DO</span></p>
+      <% end %>
+      <% if !presenter.report_submitted_this_week?(current_user.reports) %>
+        <p> &#x1F449; &nbsp;You've to submit this week's <%= link_to "report", new_report_path, class: 'text-decoration-none' %> <span class="badge badge-new">TO DO</span></p>
+      <% end %>
+      <p>&#x1F449; &nbsp;Your permission: <%= current_user.role.name%></p>
+      <p>&#x1F449; &nbsp;Your company: <%= current_user.organisation&.title%></p>
+    </div>
     <%= render partial: 'grid', locals: { items: dashboard_presenter.org_admin_items }%>
   </div>
 </div>
-<% if current_user.any_active_reviews_cycles? %>
-  <p>Test review cycle</p>
-<% end %>
-<% if current_user.reports.any? && current_user.reports.any?(&submitted_this_week?) %>
-  <p>Test report</p>
-<% end %>

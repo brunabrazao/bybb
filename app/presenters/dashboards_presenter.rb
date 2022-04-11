@@ -33,7 +33,11 @@ class DashboardsPresenter < BasePresenter
     ]
   end
 
-  def any_report_this_week?(reports)
-    reports.any?(&submitted_this_week?)
+  def report_submitted_this_week?(reports)
+    reports.any?(&:submitted_this_week?)
+  end
+
+  def formatted_date_time(date)
+    date.strftime('%a, %e %b %Y')
   end
 end
