@@ -2,7 +2,7 @@
   <div class="mt-5">
     <h1 class="text-center"><%= @feed.organisation_title %>'s Feed</h1>
     <p class="lead text-center mt-3">Give kudos to your colleagues and celebrate together. &#x1F44B;</p>
-    <% @feed.posts.each do |post| %>
+    <% @feed.posts.includes([:user]).each do |post| %>
       <div class="d-flex justify-content-center">
         <div class="card mb-2 mt-2">
           <div class="card-body">
