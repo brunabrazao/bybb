@@ -1,10 +1,8 @@
 class ReviewsCycleMailer < ApplicationMailer
-  def notify_user(reviews_cycle)
-    @reviews_cycle = reviews_cycle
-    users = reviews_cycle.users
+  def notify_user(user)
+    @user = user
+    @reviews_cycle = @user.reviews_cycles.last
 
-    users.each do |user|
-      mail(to: user.email, subject: 'You have been invited to submit a review')
-    end
+    mail(to: user.email, subject: 'You have been invited to submit a review')
   end
 end
