@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def active_reviews_cycles
-    reviews_cycles_list.where('deadline >= ?', Date.today)
+    reviews_cycles_list.where('deadline >= ?', Date.current)
   end
 
   def active_reviews_cycle_id

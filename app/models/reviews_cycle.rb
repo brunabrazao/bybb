@@ -18,7 +18,7 @@ class ReviewsCycle < ApplicationRecord
   after_save :update_notification_status
 
   def locked?
-    review_request_date.present? && review_request_date <= Date.today
+    review_request_date.present? && review_request_date <= Date.current
   end
 
   def unlocked?
@@ -26,7 +26,7 @@ class ReviewsCycle < ApplicationRecord
   end
 
   def enabled?
-    locked? && deadline.present? && deadline >= Date.today
+    locked? && deadline.present? && deadline >= Date.current
   end
 
   def update_notification_status
