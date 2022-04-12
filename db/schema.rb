@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_225833) do
+ActiveRecord::Schema.define(version: 2022_04_12_124218) do
 
   create_table "feeds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "organisation_title"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_225833) do
     t.string "selected_users"
     t.date "review_request_date"
     t.date "deadline"
+    t.boolean "notification_sent"
     t.index ["organisation_id"], name: "index_reviews_cycles_on_organisation_id"
   end
 
