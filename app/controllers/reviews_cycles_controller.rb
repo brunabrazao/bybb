@@ -89,6 +89,8 @@ class ReviewsCyclesController < ApplicationController
 
     @reviews_cycle.users.each do |user|
       ReviewsCycleMailer.notify_user(user).deliver_now
+      @reviews_cycle.notification_sent = true
+      @reviews_cycle.save
     end
   end
 end
