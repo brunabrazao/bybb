@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    redirect_to reviews_path unless @review.reviews_cycle.deadline < Date.current
+    redirect_to reviews_path unless @review.reviews_cycle.deadline <= Date.current
   end
 
   def create
