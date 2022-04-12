@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day do
+every :day, at: ['12:00 AM'] do
   rake 'batch:send_notification'
 end
