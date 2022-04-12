@@ -87,6 +87,8 @@ class ReviewsCyclesController < ApplicationController
   def send_notification_by_email
     return unless @reviews_cycle.enabled?
 
-    ReviewsCycleMailer.notify_user(@reviews_cycle).deliver_now
+    @reviews_cycle.users.each do |user|
+      ReviewsCycleMailer.notify_user(user).deliver_now
+    end
   end
 end
