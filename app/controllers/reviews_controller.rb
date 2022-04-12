@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    redirect_to reviews_path unless @review.reviews_cycle.deadline < Date.today
+    redirect_to reviews_path unless @review.reviews_cycle.deadline < Date.current
   end
 
   def create
@@ -56,7 +56,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    return unless @review.reviews_cycle.deadline < Date.today
+    return unless @review.reviews_cycle.deadline < Date.current
 
     @review.destroy
 

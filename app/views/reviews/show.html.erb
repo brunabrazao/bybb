@@ -2,7 +2,7 @@
   <div class="mt-5">
     <h1>Your review</h1>
     <p class='lead'>Review cycle name: <%= @review.reviews_cycle.name %></p>
-    <% if @review.reviews_cycle.deadline < Date.today %>
+    <% if @review.reviews_cycle.deadline < Date.current %>
       <div>
         <%= link_to "Edit this review", edit_review_path(@review), class: 'btn btn-success' %>
         <%= button_to "Destroy this review", @review, method: :delete,  class: 'btn btn-danger', data: {confirm: "Are you sure?"} %>
