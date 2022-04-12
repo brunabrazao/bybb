@@ -15,7 +15,11 @@ class ReviewsCycle < ApplicationRecord
   validates :deadline, presence: true
   validates :name, presence: true
 
-  after_save :update_notification_status
+  scope :review_request_date_ready, lambda {
+                                      where.not(review_request_date: nil).where('review_request_date <= ?', Date.current)
+                                    }
+  scope :deadline_ready, -> { where.not(deadline: nil).where('deadline >= ?', Date.current) }
+  scope :ready, -> { review_request_date_ready && deadline_ready }
 
   def locked?
     review_request_date.present? && review_request_date <= Date.current
@@ -27,13 +31,5 @@ class ReviewsCycle < ApplicationRecord
 
   def enabled?
     locked? && deadline.present? && deadline >= Date.current
-  end
-
-  def update_notification_status
-    if enabled?
-      true
-    else
-      false
-    end
   end
 end
