@@ -60,7 +60,7 @@ class OrganisationsController < ApplicationController
 
   def render_organisations
     @organisations = if current_user.role.admin?
-                       Organisation.all
+                       Organisation.includes(:users)
                      elsif current_user.role.org_admin? && current_user.organisation.present?
                        [current_user.organisation]
                      else
