@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 
   def render_users
     @users = if current_user.role.admin?
-               User.all
+               User.includes(:organisation, :role)
              elsif current_user.role.org_admin? && current_user.organisation.present?
                [current_user.organisation.users].flatten
              else
